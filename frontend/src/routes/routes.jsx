@@ -5,10 +5,13 @@ import { Sidebar } from "../components/Sidebar";
 import Profile from "../pages/Profile"
 import Login from "../pages/Login"
 
+import { Box } from "@mui/material";
+
+
 
 export function MyRoutes(){
     return( <BrowserRouter>
-
+    <Box>
         
             <Sidebar/>
             <Routes>
@@ -19,6 +22,8 @@ export function MyRoutes(){
                 
             </Routes>
        
+
+    </Box>
         
    </BrowserRouter>);
 }

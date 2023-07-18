@@ -1,5 +1,9 @@
 @import './variables.scss';
-
+.logo{
+  width: 80px;
+  height: 60px;
+  margin: 2.5rem 7.5rem;
+}
 body{
  overflow: hidden;
  height: 100vh;

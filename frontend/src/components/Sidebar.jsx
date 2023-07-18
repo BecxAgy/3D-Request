@@ -16,6 +16,7 @@ import '../styles/sidebar.css'
 import { useNavigate } from 'react-router-dom';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import {Logo} from "../images/logo_kemp.png"
 
 
 const drawerWidth = 300;
@@ -83,15 +84,15 @@ export  function Sidebar() {
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <div className="name-logo">
-            <h2>Kempetro</h2>
+            <img src={Logo} alt="" className="logo" />
           </div>
           
           <IconButton onClick={()=> setOpen(!open)}>
             {theme.direction === 'rtl' ? <Menu /> : <Menu />}
           </IconButton>
         </DrawerHeader>
-        <Box height={25}/>
-        <div className="menu-items">
+        
+        <div className={open ? "menu-items" : ""}>
           <List>
           <Box className="menu-item shadow">
             <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/")}}>
