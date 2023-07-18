@@ -4,19 +4,21 @@ import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
+import TextSnippetRoundedIcon from '@mui/icons-material/TextSnippetRounded';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/icons-material/Menu';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import '../styles/sidebar.css'
 import { useNavigate } from 'react-router-dom';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -75,7 +77,7 @@ export  function Sidebar() {
 
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box className='sidebar'>
       <CssBaseline />
       
       <Drawer variant="permanent" open={open}>
@@ -88,50 +90,116 @@ export  function Sidebar() {
             {theme.direction === 'rtl' ? <Menu /> : <Menu />}
           </IconButton>
         </DrawerHeader>
-        <Divider />
-        <List>
-        <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/")}}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
+        <Box height={25}/>
+        <div className="menu-items">
+          <List>
+          <Box className="menu-item shadow">
+            <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/")}}>
+                <ListItemButton
                   sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.5,
                   }}
                 >
-                   <InboxIcon /> 
-                </ListItemIcon>
-                <ListItemText primary="Home" sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0, 
+                      mr: open ? 3 : 'auto',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <div className="container-icon-home">
 
-            <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/historic")}}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
+                      <HomeRoundedIcon /> 
+                    </div>
+                  </ListItemIcon>
+                  <ListItemText primary="Home" sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
+          </Box>
+
+          
+          <Box className="menu-item ">
+              <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/historic")}}>
+                <ListItemButton
                   sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.5,
                   }}
                 >
-                   <InboxIcon /> 
-                </ListItemIcon>
-                <ListItemText primary="Historic" sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-        </List>
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : 'auto',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <div className="container-icon">
+
+                    <TextSnippetRoundedIcon /> 
+                    </div>
+                  </ListItemIcon>
+                  <ListItemText className='text-subitem' primary="Historic" sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
+
+              {open ? <p className="text-accounts">
+                  PÁGINA DE CONTAS
+              </p> : <Box height={10}/>} 
+
+              <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/profile")}}>
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : 'auto',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <div className="container-icon">
+
+                      <PersonRoundedIcon /> 
+                    </div>
+                  </ListItemIcon>
+                  <ListItemText className='text-subitem' primary="Perfil" sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
+              <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/profile")}}>
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : 'auto',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <div className="container-icon">
+
+                      <LogoutRoundedIcon /> 
+                    </div>
+                  </ListItemIcon>
+                  <ListItemText className='text-subitem' primary="Logout" sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
+              
+          </Box>
+          </List>
+        </div>
+       
         
       </Drawer>
       
