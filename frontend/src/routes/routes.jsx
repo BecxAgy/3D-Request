@@ -4,12 +4,12 @@ import Historic from "../pages/Historic"
 import { Sidebar } from "../components/Sidebar";
 import Profile from "../pages/Profile"
 import Login from "../pages/Login"
-import Container from "react-bootstrap/Container"
+
 
 export function MyRoutes(){
     return( <BrowserRouter>
 
-        <Container>
+        
             <Sidebar/>
             <Routes>
                 <Route path="/" element={<Home/>}/>
@@ -18,7 +18,7 @@ export function MyRoutes(){
                 <Route path="/login" element={<Login/>}/>
                 
             </Routes>
-        </Container>
+       
         
    </BrowserRouter>);
 }
