@@ -1,5 +1,9 @@
 import React from 'react'
 import './App.css'
+import {Home} from './pages/Home'
+import {Historic} from './pages/Historic'
+import {Login} from './pages/Login'
+import {Profile} from './pages/Profile'
 
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import {FiSettings} from 'react-icons/fi'
@@ -42,12 +46,27 @@ function App() {
                         Sidebar w-0
                     </div>
                  )}
+
                  <div className={
                     'dark:bg-main-bg bg-main-bg min-h-screen w-full' 
                     + activeMenu ? 'md:ml-72' : 'flex-2'
                     }>
-                        
+
+                    <div className="fixed md:staticbg-main-bg dark:bg-main-dark-bg
+                    navbar w-full">
+                        Navbar
+                    </div>  
                    
+                 </div>
+
+                 <div>
+                 <Routes>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/historic" element={<Historic/>}/>
+                    <Route path="/user-profile" element={<Profile/>}/>
+                    <Route path="/login" element={<Login/>}/>
+                    
+                </Routes>
                  </div>
         </div>
     </BrowserRouter>
