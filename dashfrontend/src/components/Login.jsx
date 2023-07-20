@@ -9,18 +9,22 @@ import FormAction from "../components/Login/FormAction"
 
 export default function Login(){
 
-    const fields=loginFields;
-let fieldsState = {};
-fields.forEach(field=>fieldsState[field.id]='');
-    const [loginState,setLoginState]=useState(fieldsState);
 
-  const handleChange=(e)=>{
-      setLoginState({...loginState,[e.target.id]:e.target.value})
-  }
+    const [email, setEmail] =useState("");
+    const [password, setPassword] = useState("");
+ 
 
-  const handleSubmit=(e)=>{
+  const handleSubmit= (e) => {
+    
       e.preventDefault();
-      authenticateUser();
+        const user= {
+            email,
+            password
+        }
+    
+        console.log(user);
+
+      
   }
 
   //Handle Login API Integration here
@@ -44,30 +48,49 @@ fields.forEach(field=>fieldsState[field.id]='');
     return(
         <div className="flex items-center justify-center ">
 
-            <form className="px-5 pb-8 mb-3 w-full md:w-1/2 lg:w-1/3">
-            
-                {
-                    fields.map(field=>
-                            <Input
-                                key={field.id}
-                                handleChange={handleChange}
-                                value={loginState[field.id]}
-                                labelText={field.labelText}
-                                labelFor={field.labelFor}
-                                id={field.id}
-                                name={field.name}
-                                type={field.type}
-                                isRequired={field.isRequired}
-                                placeholder={field.placeholder}
+            <form onSubmit= {(e) => handleSubmit(e)} className="px-5 pb-8 mb-3 w-full md:w-1/2 lg:w-1/3">
+                
+                        <Input
+                                key={1}
+                                handleChange={(e)=>setEmail(e.target.value)}
+                                value={email || ''}
+                                labelText={"Email"}
+                                labelFor={"Email"}
+                                id={"email-adress"}
+                                name={"email"}
+                                type={"email"}
+                                isRequired={true}
+                                placeholder={"Email"}
                         />
+                        
+                        <Input
+                        key={2}
+                        handleChange={(e)=>{setPassword(e.target.value)}}
+                        value={password|| ''}
+                        labelText={"Password"}
+                        labelFor={"Password"}
+                        id={"password"}
+                        name={"password"}
+                        type={"password"}
+                        isRequired={true}
+                        placeholder={"Password"}
+                />
                     
-                    )
-                }
-                <FormAction handleSubmit={handleSubmit} text="Login"/>
+                    
+                
+                <button
+                type="submit"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent 
+                text-sm font-medium rounded-md text-white bg-orange-400
+                 hover:bg-orange-500 focus:outline-none focus:ring-2 f
+                 ocus:ring-offset-2 focus:ring-orange-500 mt-10">
+
+                Login
+                </button>
 
         
 
-        </form>
+            </form>
         </div>
     )
 }
