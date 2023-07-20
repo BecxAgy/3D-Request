@@ -5,7 +5,7 @@ import Login from '../components/Login'
 function LoginPage() {
   
   return (
-    <div>
+    <div className="py-20">
        <Header
                 heading="Entre em sua conta"
                 paragraph="Não possui  ainda? "
