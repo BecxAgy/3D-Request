@@ -1,8 +1,9 @@
 import React from 'react'
 
-export function Historic() {
+function Historic() {
   return (
-    <div><h1>his</h1></div>
+    <div>Historic</div>
   )
 }
 
+export default Historic

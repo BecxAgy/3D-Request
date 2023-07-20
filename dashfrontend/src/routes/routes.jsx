@@ -1,29 +1,59 @@
 import {BrowserRouter, Routes,Route} from "react-router-dom"
-import Home from "../pages/Home"
-import Historic from "../pages/Historic"
-import { Sidebar } from "../components/Sidebar";
-import Profile from "../pages/Profile"
-import Login from "../pages/Login"
+import { Navbar, Footer, Sidebar, ThemeSettings } from '../components';
+import { Home, Historic,Profile, Login} from  "../pages"
 
-import { Box } from "@mui/material";
+
+import { useStateContext } from '../contexts/ContextProvider';
+
 
 
 
 export function MyRoutes(){
-    return( <BrowserRouter>
-    <Box>
-        
-            <Sidebar/>
-            <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/historic" element={<Historic/>}/>
-                <Route path="/user-profile" element={<Profile/>}/>
-                <Route path="/login" element={<Login/>}/>
-                
-            </Routes>
-       
 
-    </Box>
-        
-   </BrowserRouter>);
+    const {activeMenu, isAuth} = useStateContext();
+   
+
+    return( 
+    <BrowserRouter>
+        <div className="flex relative dark:bg-main-dark-bg">
+            
+            {
+                activeMenu ? (
+
+                    <div className="w-72 fixed sidebar
+                    dark:bg-secondary-dark-bg
+                    bg-white">
+                        <Sidebar/>
+                    </div>
+
+                 ) :(
+
+                    <div className='dark:bg-secondary-dark-bg'>
+                        <Sidebar/>
+                    </div>
+                 )}
+
+                 <div className={
+                    `dark:bg-main-bg bg-main-bg
+                     min-h-screen w-full 
+                     ${activeMenu ? 'md:ml-72' : 'flex-2'}`}>
+
+                    <div className= {`fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full `}>
+                    <Navbar />
+                    </div>
+
+                    <div>
+                        <Routes>
+                            <Route exact path="/home" element={<Home/>}/>
+                            <Route path="/historic" element={<Historic/>}/>
+                            <Route path="/user-profile" element={<Profile/>}/>
+                            <Route exact path="/" element={<Login/>}/>
+                            <Route path="*" element={<Login/>}/>
+                        
+                        </Routes>
+                    </div>
+                   
+                 </div>
+        </div>
+    </BrowserRouter>);
 }
