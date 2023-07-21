@@ -1,49 +1,35 @@
-import { useState } from 'react';
-import { loginFields } from "../data/dummy";
+import { useEffect, useState } from 'react';
 import Input from "./Login/Input";
-import FormAction from "../components/Login/FormAction"
+import {login, reset} from "../slices/authSlice"
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
 
 
 export default function Login(){
-
-
     const [email, setEmail] =useState("");
-    const [password, setPassword] = useState("");
- 
+    const [senha, setsenha] = useState("");
+    const dispatch = useDispatch();
+    const {loading, error} = useSelector((state) => state.auth)
 
   const handleSubmit= (e) => {
     
       e.preventDefault();
         const user= {
             email,
-            password
+            senha
         }
-    
-        console.log(user);
-
       
-  }
 
-  //Handle Login API Integration here
-  const authenticateUser = () =>{
-   
-    const endpoint=`https://kempetro-modelviewer.onrender.com/user`;
-    fetch(endpoint,
-        {
-        method:'POST',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-        body:JSON.stringify(loginFields)
-        }).then(response=>response.json())
-        .then(data=>{
-           console.log("logou")
-        })
-        .catch(error=>console.log(error))
+        dispatch(login(user));
+
   }
+  
+  useEffect(() => {
+    dispatch(reset());
+    }, dispatch)
+
 
     return(
         <div className="flex items-center justify-center ">
@@ -65,8 +51,8 @@ export default function Login(){
                         
                         <Input
                         key={2}
-                        handleChange={(e)=>{setPassword(e.target.value)}}
-                        value={password|| ''}
+                        handleChange={(e)=>{setsenha(e.target.value)}}
+                        value={senha|| ''}
                         labelText={"Password"}
                         labelFor={"Password"}
                         id={"password"}

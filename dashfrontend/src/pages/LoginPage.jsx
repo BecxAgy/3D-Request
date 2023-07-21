@@ -13,7 +13,7 @@ function LoginPage() {
                 linkUrl="mailto:email@provedor.com.br?subject=Assunto do email&body=Conteúdo do email que será preenchido automaticamente"
                 />
                
-                <Login/>
+              <Login/>
                 
             
     </div>
