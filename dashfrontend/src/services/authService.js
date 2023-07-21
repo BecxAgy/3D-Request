@@ -4,17 +4,27 @@ import { api, requestConfig } from "../utils/config";
 const login = async(user) =>{
     const config = requestConfig("POST", user);
 
+    try{
+        debugger;
+        const res = await fetch(api + "/user/login", config)
+        .then((res) => res.json())
+        .catch((err)=> err)
 
-    const res = await fetch(api + "/user/login", config)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
+        console.log(res)
 
-    if(res){
-        localStorage.setItem(user, JSON.stringify(res))
+        if(res.user){
+            localStorage.setItem("user", JSON.stringify(res.user));
+        }
+        return res;
+
+    }catch(error){
+        console.log(error)
     }
+    
 
-    return res;
+    
+
+    
 }
 
 const authService = {

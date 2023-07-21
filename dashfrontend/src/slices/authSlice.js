@@ -14,10 +14,11 @@ const initialState = {
 export const login = createAsyncThunk(
     "auth/login",
     async (user, thunkAPI) => {
+        
         const data = await authService.login(user)
 
         //check errors
-        if(data.errors){
+        if(data.error){
             return thunkAPI.rejectWithValue(data.errors[0])
         }
 
@@ -45,7 +46,7 @@ export const login = createAsyncThunk(
             .addCase(login.fulfilled, (state, action) => {
                 state.loading = false;
                 state.success= true;
-                state.error = false;
+                state.error = null;
                 state.user = action.payload;
             })
             .addCase(login.rejected, (state, action) => {

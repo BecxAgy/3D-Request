@@ -1,17 +1,22 @@
 import {BrowserRouter, Routes,Route} from "react-router-dom"
-import { Navbar, Footer, Sidebar, ThemeSettings } from '../components';
-import { Home, Historic,Profile, Login, LoginPage} from  "../pages"
-
+import { Navbar,  Sidebar,} from '../components';
+import { Home, Historic,Profile, LoginPage} from  "../pages"
+import { Navigate } from "react-router-dom";
 
 import { useStateContext } from '../contexts/ContextProvider';
-
+import { useAuth } from "../hooks/useAuth";
 
 
 
 export function MyRoutes(){
 
     const {activeMenu, isAuth} = useStateContext();
+    const {auth, loading}  = useAuth();
+    console.log(loading);
    
+    if(loading){
+        <p>Carregando...</p>
+    }
 
     return( 
     <BrowserRouter>
@@ -44,11 +49,10 @@ export function MyRoutes(){
 
                     <div>
                         <Routes>
-                            <Route exact path="/home" element={<Home/>}/>
-                            <Route path="/historic" element={<Historic/>}/>
-                            <Route path="/user-profile" element={<Profile/>}/>
-                            <Route exact path="/" element={<LoginPage/>}/>
-                            <Route path="*" element={<LoginPage/>}/>
+                            <Route path="/home" element={auth ? <Home/> : <Navigate to="/"/>}/>
+                            <Route path="/historic" element={auth ? <Historic/> : <Navigate to="/"/>}/>
+                            <Route path="/user-profile" element={auth ? <Profile/> : <Navigate to="/"/>}/>
+                            <Route path="/" element={!auth ? <LoginPage/> : <Navigate to="/home"/>}/>
                         
                         </Routes>
                     </div>
