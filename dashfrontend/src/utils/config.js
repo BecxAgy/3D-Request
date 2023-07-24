@@ -1,4 +1,4 @@
-export const api = "https://kempetro-modelviewer.onrender.com";
+export const api = "https://threedrequest.onrender.com";
 
 export const requestConfig = (method, data) =>
 {

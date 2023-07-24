@@ -10,9 +10,10 @@ import { useAuth } from "../hooks/useAuth";
 
 export function MyRoutes(){
 
-    const {activeMenu, isAuth} = useStateContext();
+    const {activeMenu, isAuth, screenSize} = useStateContext();
     const {auth, loading}  = useAuth();
     console.log(loading);
+    
    
     if(loading){
         <p>Carregando...</p>
