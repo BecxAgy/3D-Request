@@ -3,7 +3,7 @@ import React from 'react';
 function CardMain() {
   return (
     <div className="my-2 relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
-      <div className="flex  justify-center p-4">
+      <div className="flex justify-center p-4">
         <div className="flex flex-wrap -mx-3">
           <div className="w-full lg:w-1/2 px-3">
             <div className="flex flex-col h-full">
