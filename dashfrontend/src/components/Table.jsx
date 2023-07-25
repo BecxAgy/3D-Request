@@ -11,31 +11,31 @@ import { Card, CardContent } from '@mui/material';
 import { useStateContext } from '../contexts/ContextProvider';
 
 const columns = [
-  { id: 'SPEC', label: 'SPEC', minWidth: 100 },
-  { id: 'Componente', label: 'Componente', minWidth: 100 },
-  { id: 'DN-01', label: 'DN-01', minWidth: 100 },
-  { id: 'DN-02', label: 'DN-02', minWidth: 100 },
-  { id: 'DN-03', label: 'DN-03', minWidth: 100 },
-  { id: 'Observacao', label: 'Observacao', minWidth: 150 },
-  { id: 'Pendencia', label: 'Pendencia', minWidth: 200 },
+  { id: 'SPEC', label: 'SPEC'},
+  { id: 'Componente', label: 'Componente'},
+  { id: 'DN-01', label: 'DN-01'},
+  { id: 'DN-02', label: 'DN-02'},
+  { id: 'DN-03', label: 'DN-03'},
+  { id: 'Observacao', label: 'Observacao'},
+  { id: 'Pendencia', label: 'Pendencia'},
   {
     id: 'CriadoEm',
     label: 'CriadoEm',
-    minWidth: 170,
+
     
     format: (value) => new Date(value).toLocaleString('en-US'),
   },
   {
     id: 'AtualizadoEm',
     label: 'AtualizadoEm',
-    minWidth: 170,
+
     
     format: (value) => new Date(value).toLocaleString('en-US'),
   },
-  { id: 'Status', label: 'Status', minWidth: 100 },
-  { id: 'PJ', label: 'PJ', minWidth: 100 },
-  { id: 'Software', label: 'Software', minWidth: 100 },
-  { id: 'Solicitante_RGE', label: 'Solicitante', minWidth: 170 },
+  { id: 'Status', label: 'Status'},
+  { id: 'PJ', label: 'PJ'},
+  { id: 'Software', label: 'Software'},
+  { id: 'Solicitante_RGE', label: 'Solicitante'},
 ];
 
 
@@ -144,9 +144,8 @@ export default function StickyHeadTable() {
   };
 
   return (
-    <Card sx={activeMenu ? {maxWidth:'82vw' } : {maxWidth: '100vw'}}>
-        <CardContent>
-          <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+    
+      <Paper sx={activeMenu ? {maxWidth:'82vw' } : {maxWidth: '100vw'}}>
         <TableContainer>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -194,8 +193,7 @@ export default function StickyHeadTable() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
           </Paper>
-        </CardContent>
-    </Card>
+     
    
   );
 }
