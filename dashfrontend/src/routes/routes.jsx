@@ -50,10 +50,10 @@ export function MyRoutes(){
 
                     <div>
                         <Routes>
-                            <Route path="/home" element={auth ? <Home/> : <Navigate to="/"/>}/>
-                            <Route path="/historic" element={auth ? <Historic/> : <Navigate to="/"/>}/>
-                            <Route path="/user-profile" element={auth ? <Profile/> : <Navigate to="/"/>}/>
-                            <Route path="/" element={!auth ? <LoginPage/> : <Navigate to="/home"/>}/>
+                            <Route path="/" element={auth ? <Home/> : <Navigate to="/login"/>}/>
+                            <Route path="/historic" element={auth ? <Historic/> : <Navigate to="/login"/>}/>
+                            <Route path="/user-profile" element={auth ? <Profile/> : <Navigate to="/login"/>}/>
+                            <Route path="/login" element={!auth ? <LoginPage/> : <Navigate to="/"/>}/>
                         
                         </Routes>
                     </div>

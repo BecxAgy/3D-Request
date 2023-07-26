@@ -20,7 +20,7 @@ function Sidebar() {
         <>
           <div className='flex justify-between
           items-center'>
-            <Link to="/home"  className="items-center gap-3 
+            <Link to="/"  className="items-center gap-3 
             ml-3 mt-4 flex text-xl font-extrabold 
             tracking-tight dark:text-white text-slate-900" onClick={() => setActiveMenu(!activeMenu)}>
               <SiShopware /> <span>Kempetro</span>

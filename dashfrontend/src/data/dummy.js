@@ -1,7 +1,7 @@
 
 import { FiDownloadCloud, FiList, FiUser, FiLogOut, FiHome} from "react-icons/fi";
 
-export const links = [
+  export const links = [
     {
       title: 'Principal',
       links: [
@@ -45,25 +45,3 @@ export const links = [
   ];
   
 
-  export const loginFields=[
-    {
-        labelText:"Email address",
-        labelFor:"email-address",
-        id:"email-address",
-        name:"email",
-        type:"email",
-        autoComplete:"email",
-        isRequired:true,
-        placeholder:"Email address"   
-    },
-    {
-        labelText:"Password",
-        labelFor:"password",
-        id:"password",
-        name:"password",
-        type:"password",
-        autoComplete:"current-password",
-        isRequired:true,
-        placeholder:"Password"   
-    }
-]
