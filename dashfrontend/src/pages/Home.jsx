@@ -2,8 +2,10 @@
 import React from 'react';
 import { CardMain } from '../components';
 import StatsCard from '../components/StatsCard';
-import { FiFilePlus } from 'react-icons/fi';
-import Table from '../components/Table';
+import { FiFilePlus, FiPlus } from 'react-icons/fi';
+import HeaderMain from '../components/HeaderMain';
+import Solicitacoes from '../components/Solicitacoes';
+
 
 
 
@@ -12,17 +14,13 @@ import Table from '../components/Table';
 const Home = () => {
   return (
     
-    <div class="container  py-10 px-11">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div class="bg-orange-300 p-4 m-4 shadow-lg rounded-lg">
-        <h3>Total de Solicitações</h3>
-        <span>1900</span>
-      </div>
-      <div class="bg-yellow-300 p-4 m-4 shadow-lg rounded-lg">Suas Solicitações</div>
-      <div class="bg-orange-200 p-4 m-4 shadow-lg rounded-lg">Cadastrar Solicitação</div>
+    <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+      <HeaderMain category={"Início"}title={"Solicitações"}></HeaderMain>
+      <button class="bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-4 border-b-4 border-orange-400 hover:border-orange-300 rounded-full mb-3">
+        <FiPlus/>
+      </button>
+      <Solicitacoes/>
     </div>
-    <Table/>
-  </div>
   
      
 
