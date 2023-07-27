@@ -1,0 +1,18 @@
+.finalizado{
+    background-color: rgb(149, 226, 126);
+    color: green;
+    opacity: 0.8;
+  }
+
+.pendente{
+    background-color: rgb(236, 176, 64);
+    color:rgb(190, 109, 16);
+    opacity: 0.8;
+}
+
+.novo{
+    background-color: rgb(76, 187, 238);
+    color:rgb(3, 141, 233);
+    opacity: 0.8;
+}
+  

@@ -5,7 +5,7 @@ const login = async(user) =>{
     const config = requestConfig("POST", user);
 
     try{
-        debugger;
+        
         const res = await fetch(api + "/user/login", config)
         .then((res) => res.json())
         .catch((err)=> err)
