@@ -27,7 +27,7 @@ const NavButton = ({ title, customFunc, icon, color}) => (
   </TooltipComponent>
 );
 
-const Navbar = () => {
+const Navbar = (user) => {
   const { currentColor, activeMenu, setActiveMenu, handleClick,  screenSize } = useStateContext();
 
 
@@ -56,7 +56,7 @@ const Navbar = () => {
             <p>
               <span className="text-gray-400 text-14">Olá,</span>{' '}
               <span className="text-gray-400 font-bold ml-1 text-14">
-                Rebeca
+              {user.name}
               </span>
             </p>
             <MdKeyboardArrowDown className="text-gray-400 text-14" />

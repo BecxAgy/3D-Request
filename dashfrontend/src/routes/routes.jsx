@@ -5,26 +5,26 @@ import { Navigate } from "react-router-dom";
 
 import { useStateContext } from '../contexts/ContextProvider';
 import { useAuth } from "../hooks/useAuth";
+import { useSelector } from "react-redux";
 
 
 
 export function MyRoutes(){
 
     const {activeMenu, isAuth, screenSize} = useStateContext();
+    const  { user } = useSelector ((state =>state.auth));
     const {auth, loading}  = useAuth();
     console.log(loading);
     
    
-    if(loading){
-        <p>Carregando...</p>
-    }
+   
 
     return( 
     <BrowserRouter>
         <div className="flex relative dark:bg-main-dark-bg">
             
             {
-            activeMenu & isAuth  ? (
+            activeMenu & auth  ? (
 
                     <div className="w-72 fixed sidebar
                     dark:bg-secondary-dark-bg
@@ -42,10 +42,10 @@ export function MyRoutes(){
                  <div className={
                     `dark:bg-main-bg bg-main-bg
                      min-h-screen w-full 
-                     ${activeMenu & isAuth ? 'md:ml-72' : 'flex-2'}`}>
+                     ${activeMenu & auth ? 'md:ml-72' : 'flex-2'}`}>
 
-                    <div className= {`fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ${isAuth ? "" : "hidden"} `}>
-                    <Navbar />
+                    <div className= {`fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ${auth ? "" : "hidden"} `}>
+                    <Navbar user={user}/>
                     </div>
 
                     <div>

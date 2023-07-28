@@ -3,13 +3,21 @@ import { Link, NavLink } from 'react-router-dom';
 import { SiShopware } from 'react-icons/si';
 import {links} from "../data/dummy"
 import { useStateContext } from '../contexts/ContextProvider';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { logout, reset } from '../slices/authSlice';
 
 
 function Sidebar() {
   const {activeMenu, isAuth, setActiveMenu} = useStateContext();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-
-
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(reset())
+    navigate("/login");
+  }
   return (
     <div className='ml-3 h-screen 
     md:overflow-hidden overflow-auto 
@@ -39,11 +47,11 @@ function Sidebar() {
                 {item.links.map((link)=> (
                   <NavLink to={link.link} 
                   key={link.name}
-                  onClick={()=>{}}
+                  onClick={(link.name == 'Logout') ? handleLogout : ()=> console.log(link.name)}
                    className='flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-full text-md
                     text-gray-700
                     dark:text-gray-200
-                    dark:hover:text-blackhover:bg-light-gray m-2 hover:bg-orange-300'
+                    dark:hover:text-blackhover:bg-light-gray m-2 hover:text-color-300'
                   >
                     {link.icon}
                     <span className='capitalize'>{link.name}</span>
