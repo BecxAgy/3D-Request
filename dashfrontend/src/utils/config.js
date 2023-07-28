@@ -1,6 +1,6 @@
-export const api = "https://threedrequest.onrender.com";
+export const api = "https://threedrequest.onrender.com/api";
 
-export const requestConfig = (method, data) =>
+export const requestConfig = (method, data, token = null) =>
 {
     let config;
     if(method === "DELETE" || data === null){
@@ -18,6 +18,10 @@ export const requestConfig = (method, data) =>
             },
             redirect: 'follow'
         }  
+    }
+
+    if(token) {
+        config.headers.Authorization = `Bearer ${token}`;
     }
 
     return config;

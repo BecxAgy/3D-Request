@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "../services/authService"
+import { create } from "@mui/material/styles/createTransitions";
 
 const user = JSON.parse(localStorage.getItem("user"));
 
@@ -15,16 +16,21 @@ export const login = createAsyncThunk(
     "auth/login",
     async (user, thunkAPI) => {
         
-        const data = await authService.login(user)
+        const data = await authService.login(user);
 
         //check errors
-        if(data.error){
-            return thunkAPI.rejectWithValue(data.errors[0])
+        if(data.code){
+            return thunkAPI.rejectWithValue(data.code)
         }
 
         return data;
     }
 )
+ //logout user
+export const logout = createAsyncThunk("auth/logout", 
+async () => {
+    await authService.logout();
+})
 
  export const authSlice = createSlice(
     {
@@ -51,8 +57,14 @@ export const login = createAsyncThunk(
             })
             .addCase(login.rejected, (state, action) => {
                 state.loading = false;
-                state.success= action.payload;
-                state.error = console.log(action.payload);
+                state.error = action.payload;
+                console.log(action.payload);
+                state.user = null;
+            })
+            .addCase(logout.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success= true;
+                state.error = null;
                 state.user = null;
             })
         }
