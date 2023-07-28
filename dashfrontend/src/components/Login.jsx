@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import Input from "./Login/Input";
 import {login, reset} from "../slices/authSlice"
 import { useDispatch, useSelector } from 'react-redux';
+import ButtonLogin from './Login/ButtonLogin';
+import { Button } from '@mui/material';
+import Message from './Message';
 
 
 
@@ -9,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export default function Login(){
     const [email, setEmail] =useState("");
-    const [senha, setsenha] = useState("");
+    const [password, setPassword] = useState("");
     const dispatch = useDispatch();
     const {loading, error} = useSelector((state) => state.auth)
 
@@ -18,7 +21,7 @@ export default function Login(){
       e.preventDefault();
         const user= {
             email,
-            senha
+            password
         }
       
 
@@ -51,8 +54,8 @@ export default function Login(){
                         
                         <Input
                         key={2}
-                        handleChange={(e)=>{setsenha(e.target.value)}}
-                        value={senha|| ''}
+                        handleChange={(e)=>{setPassword(e.target.value)}}
+                        value={password|| ''}
                         labelText={"Password"}
                         labelFor={"Password"}
                         id={"password"}
@@ -62,17 +65,10 @@ export default function Login(){
                         placeholder={"Password"}
                 />
                     
-                    
+                    {!loading && <ButtonLogin text={'Entrar'}/>}
+                    {loading && <ButtonLogin text={'Aguarde...'}/>}
+                    {error && <Message msg={error} />}
                 
-                <button
-                type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent 
-                text-sm font-medium rounded-md text-white bg-orange-400
-                 hover:bg-orange-500 focus:outline-none focus:ring-2 f
-                 ocus:ring-offset-2 focus:ring-orange-500 mt-10">
-
-                Login
-                </button>
 
         
 

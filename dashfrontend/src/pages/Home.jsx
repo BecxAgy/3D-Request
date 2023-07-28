@@ -7,10 +7,6 @@ import HeaderMain from '../components/HeaderMain';
 import Table from '../components/Home/Table';
 
 
-
-
-
-
 const Home = () => {
   return (
     
