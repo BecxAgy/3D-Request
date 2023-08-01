@@ -17,10 +17,16 @@ export default function Register(){
     const [confirmPassword, setConfirmPassword] = useState("");
     const dispatch = useDispatch();
     const {loading, error} = useSelector((state) => state.auth)
+    const [errorPassword, setErrorPassword ] = useState(false);
 
   const handleSubmit= (e) => {
-    
-      e.preventDefault();
+    e.preventDefault();
+    if (password !== confirmPassword) {
+        // Senhas não coincidem, mostra mensagem de erro
+        setErrorPassword(true);
+        
+    }else{
+        
         const user= {
             name,
             email,
@@ -29,8 +35,10 @@ export default function Register(){
         }
       
 
-        dispatch(register(user));
+       dispatch(register(user));
 
+    }
+     
   }
   
   useEffect(() => {
@@ -56,7 +64,7 @@ export default function Register(){
                         />
 
                         <Input
-                                key={1}
+                                key={2}
                                 handleChange={(e)=>setEmail(e.target.value)}
                                 value={email || ''}
                                 labelText={"Email"}
@@ -69,7 +77,7 @@ export default function Register(){
                         />
                         
                         <Input
-                        key={2}
+                        key={3}
                         handleChange={(e)=>{setPassword(e.target.value)}}
                         value={password|| ''}
                         labelText={"Password"}
@@ -82,13 +90,13 @@ export default function Register(){
                         />
 
                         <Input
-                        key={2}
+                        key={4}
                         handleChange={(e)=>{setConfirmPassword(e.target.value)}}
                         value={confirmPassword|| ''}
-                        labelText={"Password"}
-                        labelFor={"Password"}
-                        id={"password"}
-                        name={"password"}
+                        labelText={"confirmPassword"}
+                        labelFor={"confirmPassword"}
+                        id={"confirmPassword"}
+                        name={"confirmPassword"}
                         type={"password"}
                         isRequired={true}
                         placeholder={"Confirme sua senha"}
@@ -98,6 +106,7 @@ export default function Register(){
                     {!loading && <ButtonLogin text={'Registrar'}/>}
                     {loading && <ButtonLogin text={'Aguarde...'}/>}
                     {error && <Message msg={error} />}
+                    {errorPassword && <Message msg='As senhas são diferentes. Tente novamente!'/>}
             </form>
         </div>
     )

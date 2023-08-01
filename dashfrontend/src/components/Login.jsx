@@ -31,7 +31,7 @@ export default function Login(){
   
   useEffect(() => {
     dispatch(reset());
-    }, dispatch)
+    }, [dispatch])
 
 
     return(
