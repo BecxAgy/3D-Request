@@ -6,6 +6,7 @@ import { Navigate } from "react-router-dom";
 import { useStateContext } from '../contexts/ContextProvider';
 import { useAuth } from "../hooks/useAuth";
 import { useSelector } from "react-redux";
+import RegisterPage from "../pages/RegisterPage";
 
 
 
@@ -54,6 +55,7 @@ export function MyRoutes(){
                             <Route path="/historic" element={auth ? <Historic/> : <Navigate to="/login"/>}/>
                             <Route path="/user-profile" element={auth ? <Profile/> : <Navigate to="/login"/>}/>
                             <Route path="/login" element={!auth ? <LoginPage/> : <Navigate to="/"/>}/>
+                            <Route path="/register" element={!auth ? <RegisterPage/> : <Navigate to="/"/>}/>
                         
                         </Routes>
                     </div>
