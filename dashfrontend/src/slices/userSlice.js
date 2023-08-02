@@ -1,4 +1,5 @@
 import {createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import userService from "../services/userService";
 
 const initialState = {
     user: {},
@@ -7,6 +8,17 @@ const initialState = {
     loading: false,
     message: null
 };
+
+export const getUser = createAsyncThunk(
+    "user/get",
+    async(id, thunkAPI) => {
+        
+        //chamar o service get passando o user e o token
+        debugger
+        const data = await userService.getUser(id)
+        return data;
+    }
+)
 
 export const userSlice = createSlice({
 
@@ -17,6 +29,19 @@ export const userSlice = createSlice({
             state.message = null;
         },
     },
+    extraReducers: (builder) => {
+        builder
+        .addCase(getUser.pending, (state) => {
+            state.loading = true;
+            state.error = false;
+        })
+        .addCase(getUser.fulfilled, (state, action) => {
+            state.loading = false;
+            state.success= true;
+            state.error = null;
+            state.user = action.payload;
+        })
+    }
 });
 
 export const {resetMessage} = userSlice.actions;
