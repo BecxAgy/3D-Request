@@ -27,20 +27,23 @@ const NavButton = ({ title, customFunc, icon, color}) => (
 const Navbar = () => {
   const { currentColor, activeMenu, setActiveMenu} = useStateContext();
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
-  const {id} = useParams();
-  const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("user"));
 
-  const {user, loading} = useSelector((state) => state.user);
+  console.log(user);
+//   const {id} = useParams();
+//   const dispatch = useDispatch();
+
+//   const {user, loading} = useSelector((state) => state.user);
 
  
- useEffect(() => {
-  dispatch(getUser(id));
-  console.log(user.name)
- }, [dispatch, id]);
+//  useEffect(() => {
+//   dispatch(getUser(id));
+//   console.log(user.name)
+//  }, [dispatch, id]);
  
- if(loading){
-  return <h1>Carregando....</h1>
- }
+//  if(loading){
+//   return <h1>Carregando....</h1>
+//  }
 
   return (
     <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative ">
@@ -55,8 +58,9 @@ const Navbar = () => {
           >
            
             <p>
-              <span className="text-gray-400 text-14">Olá,</span>
+              <span className="text-gray-400 text-14">Olá</span>
               <span className="text-gray-400 font-bold ml-1 text-14">
+                {user && user.name ? user.name : ""}
                 
               </span>
             </p>
