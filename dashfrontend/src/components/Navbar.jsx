@@ -3,9 +3,6 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { useStateContext } from '../contexts/ContextProvider';
-import { getUser } from '../slices/userSlice';
-import { useDispatch, useSelector} from 'react-redux';
-import { useParams } from 'react-router';
 
 const NavButton = ({ title, customFunc, icon, color}) => (
   <TooltipComponent content={title} position="BottomCenter">

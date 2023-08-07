@@ -1,20 +1,21 @@
 import React from 'react'
+import { Select, Option } from "@material-tailwind/react";
 
-function ButtonFilter() {
+function ButtonFilter({label, dataOptions}) {
+ 
   return (
-    <div class="relative inline-block text-left">
-  
-        
-        <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-        <option selected>Ordenar</option>
-        <option value="US">United States</option>
-        <option value="CA">Canada</option>
-        <option value="FR">France</option>
-        <option value="DE">Germany</option>
-        </select>
+    
+      <Select color='orange' label={label}>
+        <Option>Material Tailwind HTML</Option>
+        <Option>Material Tailwind React</Option>
+        <Option>Material Tailwind Vue</Option>
+        <Option>Material Tailwind Angular</Option>
+        <Option>Material Tailwind Svelte</Option>
+      </Select>
+    
+  );
 
-</div>
-  )
+  
 }
 
 export default ButtonFilter

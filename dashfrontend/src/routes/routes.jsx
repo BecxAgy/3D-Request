@@ -7,12 +7,13 @@ import { useStateContext } from '../contexts/ContextProvider';
 import { useAuth } from "../hooks/useAuth";
 import { useSelector } from "react-redux";
 import RegisterPage from "../pages/RegisterPage";
+import RegisterSolicitacao from "../pages/RegisterSolicitacao";
 
 
 
 export function MyRoutes(){
 
-    const {activeMenu, isAuth, screenSize} = useStateContext();
+    const {activeMenu} = useStateContext();
     const  { user } = useSelector ((state =>state.auth));
     const {auth, loading}  = useAuth();
     console.log(loading);
@@ -56,7 +57,7 @@ export function MyRoutes(){
                             <Route path="/user-profile" element={auth ? <Profile/> : <Navigate to="/login"/>}/>
                             <Route path="/login" element={!auth ? <LoginPage/> : <Navigate to="/"/>}/>
                             <Route path="/register" element={!auth ? <RegisterPage/> : <Navigate to="/"/>}/>
-                        
+                            <Route path="/form-solicitacao" element={auth ? <RegisterSolicitacao/> : <Navigate to="/login"/>}/>
                         </Routes>
                     </div>
                    

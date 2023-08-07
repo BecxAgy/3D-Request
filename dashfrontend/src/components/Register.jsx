@@ -3,12 +3,7 @@ import Input from "./Auth/Input";
 import {register, reset} from "../slices/authSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import ButtonLogin from './Auth/ButtonLogin';
-
 import Message from './Message';
-
-
-
-
 
 export default function Register(){
     const [name, setName] =useState("");

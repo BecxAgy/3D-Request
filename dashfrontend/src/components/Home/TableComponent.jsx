@@ -71,7 +71,8 @@ function TableComponent() {
               </TableCell>
               <TableCell className='p-3 text-sm text-gray-700'>
                 {row.Solicitante_RGE}
-              </TableCell>
+              </TableCell> 
+              
               <TableCell className="px-3 py-4 text-right">
                 <a href="#" className="font-medium text-orange-600 dark:text-orange-500 hover:underline">
                   <FiEdit />
