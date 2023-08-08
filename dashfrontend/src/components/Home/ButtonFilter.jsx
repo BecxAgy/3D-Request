@@ -1,21 +1,20 @@
-import React from 'react'
+import React from 'react';
 import { Select, Option } from "@material-tailwind/react";
 
-function ButtonFilter({label, dataOptions}) {
- 
-  return (
-    
-      <Select color='orange' label={label}>
-        <Option>Material Tailwind HTML</Option>
-        <Option>Material Tailwind React</Option>
-        <Option>Material Tailwind Vue</Option>
-        <Option>Material Tailwind Angular</Option>
-        <Option>Material Tailwind Svelte</Option>
-      </Select>
-    
-  );
+function ButtonFilter({ label, dataOptions=[]}) {
 
-  
+
+  return (   
+    <Select color='orange' label={label}>
+    {dataOptions && dataOptions.map(option => (
+      label === "PJ" ? <Option key={option.pj} value={option.pj}>{option.pj}</Option>
+      :
+      <Option key={option.id} value={label== 'Status' ? option.descricao : option.nome}>
+        {label== 'Status' ? option.descricao : option.nome}
+      </Option>
+    ))}
+  </Select>
+  );
 }
 
-export default ButtonFilter
+export default ButtonFilter;

@@ -14,6 +14,7 @@ const register = async(user) => {
 
         if(res.success){
             localStorage.setItem("user", JSON.stringify(res.data));
+            
         }
         return res;
 
@@ -37,6 +38,7 @@ const login = async(user) =>{
 
         if(res.token){
             localStorage.setItem("user", JSON.stringify(res.resUser));
+            localStorage.setItem("token", JSON.stringify(res.token));
         }
         return res;
 

@@ -16,12 +16,9 @@ const Home = () => {
         <div className='w-3/2 ' >
         <ButtonAdd/>
         </div>
-        <div className='w-3/2 ' >
-          <ButtonFilter/>
-        </div>
-       
+        
       
-          <SearchInput/>
+          
       
           
      

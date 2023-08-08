@@ -1,15 +1,26 @@
 import React from 'react'
 import {
     Input,
-    Checkbox,
-    Typography,
     Textarea, Button
   } from "@material-tailwind/react";
 import ButtonFilter from '../Home/ButtonFilter'
-import { Box } from '@mui/material';
+import { useState, useEffect } from 'react';
+import {useDispatch, useSelector} from "react-redux"
+import { getAllProjetos } from '../../slices/projetoSlice';
 
 
 function Form() {
+  const dispatch = useDispatch();
+ const {projetos} = useSelector((state) => state.projeto);
+ 
+
+  
+
+  useEffect(() => {
+    dispatch(getAllProjetos());
+    console.log(projetos);
+  }, [dispatch]);
+
   return (
     <form className=" mt-8 mb-2">
 
@@ -18,7 +29,9 @@ function Form() {
             <Input color='orange' size="lg" label="SPEC" />
             <div className="grid md:grid-rows-2 sm:grid-rows-1 gap-6">
                 <Input color='orange' size="lg" label="Componente" />
-                <ButtonFilter label={"Status"}/> 
+                
+                
+                <ButtonFilter label={"Status"}  />
             </div>
             
 
@@ -26,8 +39,8 @@ function Form() {
                 <Textarea color='orange' label='Pendência'></Textarea>
 
                 <div className="grid md:grid-rows-2 sm:grid-rows-1 gap-6">
-                    <ButtonFilter label={"PJ"}/> 
-                    <ButtonFilter label={"Software"}/> 
+                  <ButtonFilter label={"PJ"} dataOptions={projetos} />
+                  <ButtonFilter label={"Software"}  />
                 </div>
                 
            </div>

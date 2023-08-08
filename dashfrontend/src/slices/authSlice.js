@@ -9,6 +9,7 @@ const initialState = {
     error : false, 
     success: false,
     loading : false,
+    message: null
 }
 
 //register user
