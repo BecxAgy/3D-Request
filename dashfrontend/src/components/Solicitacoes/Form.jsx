@@ -4,21 +4,24 @@ import {
     Textarea, Button
   } from "@material-tailwind/react";
 import ButtonFilter from '../Home/ButtonFilter'
-import { useState, useEffect } from 'react';
+import {useEffect } from 'react';
 import {useDispatch, useSelector} from "react-redux"
 import { getAllProjetos } from '../../slices/projetoSlice';
+import { getAllStatus } from '../../slices/statusSlice';
+import { getAllSoftwares } from '../../slices/softwareSlice';
 
 
 function Form() {
   const dispatch = useDispatch();
  const {projetos} = useSelector((state) => state.projeto);
- 
-
+ const {statuses} = useSelector((state) => state.status);
+ const {softwares} = useSelector((state) => state.software)
   
 
   useEffect(() => {
+    dispatch(getAllStatus());
     dispatch(getAllProjetos());
-    console.log(projetos);
+    dispatch(getAllSoftwares());
   }, [dispatch]);
 
   return (
@@ -30,8 +33,8 @@ function Form() {
             <div className="grid md:grid-rows-2 sm:grid-rows-1 gap-6">
                 <Input color='orange' size="lg" label="Componente" />
                 
-                
-                <ButtonFilter label={"Status"}  />
+
+                <ButtonFilter label={"Status"} dataOptions={statuses} />
             </div>
             
 
@@ -40,7 +43,7 @@ function Form() {
 
                 <div className="grid md:grid-rows-2 sm:grid-rows-1 gap-6">
                   <ButtonFilter label={"PJ"} dataOptions={projetos} />
-                  <ButtonFilter label={"Software"}  />
+                  <ButtonFilter label={"Software"} dataOptions={softwares} />
                 </div>
                 
            </div>
