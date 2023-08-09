@@ -15,26 +15,38 @@ function Form() {
   const dispatch = useDispatch();
  const {projetos} = useSelector((state) => state.projeto);
  const {statuses} = useSelector((state) => state.status);
- const {softwares} = useSelector((state) => state.software)
-  
+ const {softwares} = useSelector((state) => state.software);
+ const {user, loading} = useSelector((state) => state.user);
+ const{
+  solicitacoes,
+  loading : loadingSolicitacao,
+  error: errorSolicitacao,
+  message
+ } = useSelector((state) => state.solicitacao);
 
+ 
+  //get data for select labels
   useEffect(() => {
     dispatch(getAllStatus());
     dispatch(getAllProjetos());
     dispatch(getAllSoftwares());
   }, [dispatch]);
 
-  return (
-    <form className=" mt-8 mb-2">
+  //post solicitacao
+  const submitHandle = (e) =>
+  {
+    e.preventDefault();
 
-    <div className="grid md:grid-cols-1 gap-6 ">
-        
+  }
+  return (
+    <form className=" mt-8 mb-2" onSubmit={submitHandle}>
+
+      <div className="grid md:grid-cols-1 gap-6 "> 
             <Input color='orange' size="lg" label="SPEC" />
             <div className="grid md:grid-rows-2 sm:grid-rows-1 gap-6">
                 <Input color='orange' size="lg" label="Componente" /> 
                 <ButtonFilter label={"Status"} dataOptions={statuses} />
             </div>
-            
 
            <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-6">
                 <Textarea color='orange' label='Pendência'></Textarea>
@@ -42,23 +54,14 @@ function Form() {
                 <div className="grid md:grid-rows-2 sm:grid-rows-1 gap-6">
                   <ButtonFilter label={"PJ"} dataOptions={projetos} />
                   <ButtonFilter label={"Software"} dataOptions={softwares} />
-                </div>
-                
+                </div>          
            </div>
-
               <div className="grid md:grid-cols-3 sm:grid-cols-1 gap-4 ">
                 <Input color='orange' size="lg" label="DN-01" />
                 <Input color='orange' size="lg" label="DN-02" />
                 <Input color='orange'  size="lg" label="DN-03" /> 
             </div>
            <Textarea color='orange' label='Observação'></Textarea>       
-        
-
-        
-           
-           
-           
-        
         
     </div>
     
