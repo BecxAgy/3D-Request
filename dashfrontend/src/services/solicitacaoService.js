@@ -1,26 +1,26 @@
 import { api, requestConfig } from "../utils/config"
 
 
- const getProjetos = async(token) =>{
+ const getSolicitacoes = async(token) =>{
     
     const config = requestConfig("GET", null, token);
 
    try{
       debugger;
-      const res = await fetch(api + "/projeto", config)
+      const res = await fetch(api + "/solicitacao", config)
       .then((res) => res.json())
       .catch(err => err);
 
-      return res.projetos;
-
+      console.log(res);
+      return res;
 
    }catch(error){
          console.log(error);
    }
  }
 
- const projetoService = {
-   getProjetos
+ const solicitacaoService = {
+    getSolicitacoes
  }
 
- export default projetoService;
+ export default solicitacaoService;

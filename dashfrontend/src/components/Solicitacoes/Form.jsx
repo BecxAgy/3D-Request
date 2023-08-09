@@ -31,9 +31,7 @@ function Form() {
         
             <Input color='orange' size="lg" label="SPEC" />
             <div className="grid md:grid-rows-2 sm:grid-rows-1 gap-6">
-                <Input color='orange' size="lg" label="Componente" />
-                
-
+                <Input color='orange' size="lg" label="Componente" /> 
                 <ButtonFilter label={"Status"} dataOptions={statuses} />
             </div>
             

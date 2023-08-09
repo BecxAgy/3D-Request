@@ -4,6 +4,7 @@ import userReducer from './slices/userSlice'
 import projetoSlice from "./slices/projetoSlice";
 import statusSlice from "./slices/statusSlice";
 import softwareSlice from "./slices/softwareSlice";
+import solicitacaoSlice from "./slices/solicitacaoSlice";
 
 
 export const store = configureStore({
@@ -13,5 +14,6 @@ export const store = configureStore({
         projeto: projetoSlice,
         status: statusSlice,
         software: softwareSlice,
+        solicitacao: solicitacaoSlice,
     },
 });

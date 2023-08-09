@@ -1,18 +1,24 @@
-.finalizado{
+.Concluido{
     background-color: rgb(149, 226, 126);
     color: green;
     opacity: 0.8;
   }
 
-.pendente{
+.Pendente{
     background-color: rgb(236, 176, 64);
     color:rgb(190, 109, 16);
     opacity: 0.8;
 }
 
-.novo{
-    background-color: rgb(76, 187, 238);
-    color:rgb(3, 141, 233);
+.Cancelado{
+    background-color: rgb(238, 100, 76);
+    color:rgb(233, 76, 3);
     opacity: 0.8;
 }
+.EmAndamento{
+    background-color: rgb(76, 146, 238);
+    color:rgb(3, 110, 233);
+    opacity: 0.8;
+}
+  
   
