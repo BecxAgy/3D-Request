@@ -25,6 +25,7 @@ import { api, requestConfig } from "../utils/config"
    const config = requestConfig("POST", data, token);
 
    try {
+      debugger;
       const res = await fetch(api + "/solicitacao", config)
       .then((res) => res.json())
       .catch((err) => err);
