@@ -38,7 +38,7 @@ export default function Register(){
   
   useEffect(() => {
     dispatch(reset());
-    }, dispatch)
+    }, [dispatch])
 
 
     return(
