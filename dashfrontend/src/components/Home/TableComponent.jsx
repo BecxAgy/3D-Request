@@ -11,13 +11,13 @@ import { useEffect } from 'react';
 
 function TableComponent() {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const dispatch = useDispatch();
   const {solicitacoes} = useSelector((state) => state.solicitacao) ;
 
   useEffect(() => {
     dispatch(getAllSolicitacoes()); 
-  }, [dispatch]);
+  }, [dispatch],[]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -30,7 +30,9 @@ function TableComponent() {
 
   return (
     <div className='shadow-2xl rounded-lg overflow-auto'>
-    <TableContainer>
+
+    {solicitacoes && <div>
+      <TableContainer>
       <Table className='w-full'>
         <TableHead>
           <TableRow>
@@ -42,7 +44,7 @@ function TableComponent() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {(solicitacoes ? rowsPerPage > 0
+          {((solicitacoes || solicitacoes.length > 0) ? rowsPerPage > 0
             ? solicitacoes.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             :  solicitacoes : []
           ).map((solicitacoes, index) => (
@@ -65,19 +67,23 @@ function TableComponent() {
               <TableCell className='p-3 text-sm text-gray-700 whitespace-nowrap'>
                 {solicitacoes.createdAt}
               </TableCell>
+             
+              
               <TableCell className='p-3 text-sm text-gray-700 whitespace-nowrap'>
-                <span className={`p-1.5 font-medium uppercase tracking-wider ${solicitacoes.statusSolicitacao['descricao'].replace(" ","")} rounded-lg bg-opacity-50`}>
-                  {solicitacoes.statusSolicitacao['descricao']}
-                </span>
+             
+             <span className={`p-1.5 font-medium uppercase tracking-wider  rounded-lg bg-opacity-50 bg-blue-500 text-blue-600`}>
+              {solicitacoes.statusSolicitacao && solicitacoes.statusSolicitacao["descricao"] }
+             </span>  
+           </TableCell>
+
+           <TableCell className='p-3 text-sm text-gray-700'>
+              {solicitacoes.projetoSolicitacao && solicitacoes.projetoSolicitacao["pj"] }
               </TableCell>
               <TableCell className='p-3 text-sm text-gray-700'>
-                {solicitacoes.projetoSolicitacao["pj"]}
+              {solicitacoes.softwareSolicitacao && solicitacoes.softwareSolicitacao["nome"] }
               </TableCell>
               <TableCell className='p-3 text-sm text-gray-700'>
-                {solicitacoes.softwareSolicitacao['nome']}
-              </TableCell>
-              <TableCell className='p-3 text-sm text-gray-700'>
-                {solicitacoes.solicitante['name']}
+              {solicitacoes.solicitante && solicitacoes.solicitante["name"] }
               </TableCell> 
               
               <TableCell className="px-3 py-4 text-right">
@@ -98,9 +104,9 @@ function TableComponent() {
     <TablePagination
       rowsPerPageOptions={[5, 10, { label: 'All', value: -1 }]}
       colSpan={3}
-      count={rows.length}
       rowsPerPage={rowsPerPage}
       page={page}
+      count={solicitacoes.length}
       SelectProps={{
         inputProps: {
           'aria-label': 'rows per page',
@@ -110,6 +116,8 @@ function TableComponent() {
       onPageChange={handleChangePage}
       onRowsPerPageChange={handleChangeRowsPerPage}
     />
+    </div> }
+    
   </div>
 );
 
