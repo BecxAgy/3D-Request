@@ -10,8 +10,6 @@ const register = async(user) => {
         .then((res) => res.json())
         .catch((err)=> err)
 
-        console.log(res)
-
         if(res.success){
             localStorage.setItem("user", JSON.stringify(res.data));
             
@@ -32,9 +30,7 @@ const login = async(user) =>{
         debugger;
         const res = await fetch(api + "/user/login", config)
         .then((res) => res.json())
-        .catch((err)=> err)
-
-        console.log(res)
+        .catch((err)=> err);
 
         if(res.token){
             localStorage.setItem("user", JSON.stringify(res.resUser));
@@ -51,6 +47,7 @@ const login = async(user) =>{
 //logout
 const logout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("token");
 }
 
 const authService = {

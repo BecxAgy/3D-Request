@@ -11,6 +11,8 @@ import { getAllStatus } from '../../slices/statusSlice';
 import { getAllSoftwares } from '../../slices/softwareSlice';
 import {useForm} from 'react-hook-form';
 import { createSolicitacao } from '../../slices/solicitacaoSlice';
+import { useHistory, useNavigate } from 'react-router-dom';
+
 
 
 function Form() {
@@ -26,7 +28,7 @@ function Form() {
     error: errorSolicitacao,
     message
   } = useSelector((state) => state.solicitacao);
-
+  const navigate = useNavigate();
  
   //get data for select labels
   useEffect(() => {
@@ -45,6 +47,8 @@ function Form() {
       console.log(e);
       const data = e;
       dispatch(createSolicitacao(data))
+      
+
 
   }
 
@@ -53,7 +57,7 @@ function Form() {
     <form className=" mt-8 mb-2" >
 
       <div className="grid md:grid-cols-1 gap-6 "> 
-            <Input color='orange' size="lg" label="SPEC"  />
+            <Input color='orange' size="lg" label="SPEC" {...register("especificacao")} />
             <div className="grid md:grid-rows-2 sm:grid-rows-1 gap-6">
                 <Input color='orange' size="lg" label="Componente" {...register("componente")} required minLength={5}/> 
                 <ButtonFilter label={"Status"} dataOptions={statuses} register={register("statusId") } required/>
@@ -76,7 +80,7 @@ function Form() {
         
     </div>
     
-    <Button className='w-96 mt-6' size='lg' color='orange' onClick={()=> handleSubmit(onSubmit)()}>CADASTRAR</Button>
+    <Button className='w-96 mt-6' size='lg' color='orange' onClick={()=> handleSubmit(onSubmit)().then(navigate("/"))}>{loadingSolicitacao  ? 'Aguarde...' : 'CADASTRAR'}</Button>
     
     
   </form>

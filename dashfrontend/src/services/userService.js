@@ -1,13 +1,13 @@
 import { api, requestConfig } from "../utils/config";
 
 //GET USER DETAILS
-const getUser = async (id) => {
+const getUser = async (id, token) => {
 
-    const config = requestConfig("GET");
+    const config = requestConfig("GET", token);
 
     try{
         debugger;
-        const res = await fetch(api + `user/${id}`, config)
+        const res = await fetch(api + `/user/${id}`, config)
         .then((res) => res.json())
         .catch((err) => err);
 

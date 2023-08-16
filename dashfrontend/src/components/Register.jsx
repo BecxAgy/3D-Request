@@ -31,7 +31,7 @@ export default function Register(){
       
 
        dispatch(register(user));
-
+        
     }
      
   }
