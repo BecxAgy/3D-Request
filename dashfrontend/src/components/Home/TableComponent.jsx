@@ -1,37 +1,39 @@
 import React from 'react'
-import { columns, rows } from '../../data/dummy'
+import { columns} from '../../data/dummy'
 import './Table.css'
 import { Table, TableContainer, TableHead, TableRow, TableCell, TableBody, TablePagination } from '@mui/material';
 import { FiEdit, FiTrash } from 'react-icons/fi';
 import {useDispatch, useSelector} from "react-redux"
 import { getAllSolicitacoes } from '../../slices/solicitacaoSlice';
 import { useEffect } from 'react';
+import usePagination from '../../hooks/usePagination'
 
 
 
 function TableComponent() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
   const dispatch = useDispatch();
-  const {solicitacoes} = useSelector((state) => state.solicitacao) ;
+  const { solicitacoes } = useSelector((state) => state.solicitacao);
 
   useEffect(() => {
-    dispatch(getAllSolicitacoes()); 
-  }, [dispatch],[]);
+    dispatch(getAllSolicitacoes());
+  }, [dispatch]);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+  const {
+    page,
+    rowsPerPage,
+    handleChangePage,
+    handleChangeRowsPerPage,
+    paginatedData
+  } = usePagination(solicitacoes);
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
 
   return (
     <div className='shadow-2xl rounded-lg overflow-auto'>
 
-    {solicitacoes && <div>
+    {solicitacoes && 
+    
+    <div>
       <TableContainer>
       <Table className='w-full'>
         <TableHead>
@@ -44,11 +46,11 @@ function TableComponent() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {((solicitacoes || solicitacoes.length > 0) ? rowsPerPage > 0
-            ? solicitacoes.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            :  solicitacoes : []
+          {(
+            rowsPerPage > 0 ? 
+            paginatedData :  solicitacoes
           ).map((solicitacoes, index) => (
-            <TableRow key={index} className='bg-white' onClick={(i) => { console.log() }}>
+            <TableRow key={index} className='bg-white' >
               <TableCell className='p-3 text-sm  font-bold whitespace-nowrap'>
                 {solicitacoes.especificacao}
               </TableCell>
@@ -66,27 +68,23 @@ function TableComponent() {
               </TableCell>
               <TableCell className='p-3 text-sm text-gray-700 whitespace-nowrap'>
                 {solicitacoes.createdAt}
-              </TableCell>
-             
-              
+              </TableCell>     
               <TableCell className='p-3 text-sm text-gray-700 whitespace-nowrap'>
-             
-             <span className={`p-1.5 font-medium uppercase tracking-wider  rounded-lg bg-opacity-50 bg-blue-500 text-blue-600`}>
-              {solicitacoes.statusSolicitacao && solicitacoes.statusSolicitacao["descricao"] }
-             </span>  
-           </TableCell>
-
-           <TableCell className='p-3 text-sm text-gray-700'>
-              {solicitacoes.projetoSolicitacao && solicitacoes.projetoSolicitacao["pj"] }
+                <span className={`p-1.5 font-medium uppercase tracking-wider  rounded-lg bg-opacity-50 bg-blue-500 text-blue-600`}>
+                  {solicitacoes.statusSolicitacao && solicitacoes.statusSolicitacao["descricao"] }
+                </span>  
               </TableCell>
               <TableCell className='p-3 text-sm text-gray-700'>
-              {solicitacoes.softwareSolicitacao && solicitacoes.softwareSolicitacao["nome"] }
+                {solicitacoes.projetoSolicitacao && solicitacoes.projetoSolicitacao["pj"] }
               </TableCell>
               <TableCell className='p-3 text-sm text-gray-700'>
-              {solicitacoes.solicitante && solicitacoes.solicitante["name"] }
+                {solicitacoes.softwareSolicitacao && solicitacoes.softwareSolicitacao["nome"] }
+              </TableCell>
+              <TableCell className='p-3 text-sm text-gray-700'>
+                {solicitacoes.solicitante && solicitacoes.solicitante["name"] }
               </TableCell> 
               
-              <TableCell className="px-3 py-4 text-right">
+              <TableCell className="px-3 py-4 text-right" >
                 <a href="#" className="font-medium text-orange-600 dark:text-orange-500 hover:underline">
                   <FiEdit />
                 </a>
@@ -116,7 +114,9 @@ function TableComponent() {
       onPageChange={handleChangePage}
       onRowsPerPageChange={handleChangeRowsPerPage}
     />
-    </div> }
+    </div> 
+    }
+     
     
   </div>
 );
