@@ -10,12 +10,12 @@ import { getAllProjetos } from '../../slices/projetoSlice';
 import { getAllStatus } from '../../slices/statusSlice';
 import { getAllSoftwares } from '../../slices/softwareSlice';
 import {useForm} from 'react-hook-form';
-import { createSolicitacao } from '../../slices/solicitacaoSlice';
+import { createSolicitacao, updateSolicitacao } from '../../slices/solicitacaoSlice';
 import { useHistory, useNavigate } from 'react-router-dom';
 
 
 
-function Form({solicitacao}) {
+function Form({solicitacao, mode}) {
   const {register, handleSubmit, formState : {errors}} = useForm();
   const dispatch = useDispatch();
   const {projetos} = useSelector((state) => state.projeto);
@@ -38,17 +38,24 @@ function Form({solicitacao}) {
   }, [dispatch]);
 
   //post solicitacao
-  const onSubmit = (e) =>
+  const onSubmit = (data) =>
   {
-      e.statusId = parseInt(e.statusId)
-      e.softwareId = parseInt(e.softwareId)
-      e.solicitanteId = JSON.parse(localStorage.getItem("user")).id;
-
-      console.log(e);
-      const data = e;
-      dispatch(createSolicitacao(data))
+      data.statusId = parseInt(data.statusId)
+      data.softwareId = parseInt(data.softwareId)
       
+      
+      if(mode === 'edit'){
+        data.executorId = JSON.parse(localStorage.getItem("user")).id;
+        data.solicitanteId = solicitacao.solicitanteId;
+        console.log(data, solicitacao.id);
+        
+        dispatch(updateSolicitacao(data, solicitacao.id));
 
+      }else{
+        data.solicitanteId = JSON.parse(localStorage.getItem("user")).id;
+       //dispatch(createSolicitacao(data));
+      }
+       
 
   }
 

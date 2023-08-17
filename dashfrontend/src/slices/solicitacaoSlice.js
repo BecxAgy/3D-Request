@@ -9,7 +9,7 @@ const initialState = {
     loading: false,
     message: null
     
-}
+};
 
 
 //slice get all
@@ -18,7 +18,7 @@ export const getAllSolicitacoes = createAsyncThunk("solicitacao/getall", async (
     debugger;
     const data = await solicitacaoService.getSolicitacoes(token);
     return data;
-})
+});
 
 export const createSolicitacao = createAsyncThunk("solicitacao/create", async (solicitacao, thunkAPI) => {
     const token = JSON.parse(localStorage.getItem("token"));
@@ -30,7 +30,7 @@ export const createSolicitacao = createAsyncThunk("solicitacao/create", async (s
     }
 
     return data;
-})
+});
 
 
 export const deleteSolicitacao = createAsyncThunk("solicitacao/delete", async(id, thunkAPI) => {
@@ -42,7 +42,19 @@ export const deleteSolicitacao = createAsyncThunk("solicitacao/delete", async(id
         return thunkAPI.rejectWithValue(data.erro);
     }
       return data;
-})
+});
+
+export const updateSolicitacao =createAsyncThunk("solicitacao/update", async (solicitacao, id, thunkAPI) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    debugger
+    const data = await solicitacaoService.updateSolictacao(id, solicitacao, token);
+
+    if(data.erro){
+        return thunkAPI.rejectWithValue(data.erro);
+    }
+
+    return data;
+});
 
 export const solicitacaoSlice = createSlice({
     name: "solicitacao",
@@ -102,7 +114,30 @@ export const solicitacaoSlice = createSlice({
             state.error = action.payload;
             state.solicitacao = {};
         })
-        
+        .addCase(updateSolicitacao.pending, (state) => {
+            state.loading = true;
+            state.error = false;
+        })
+        .addCase(updateSolicitacao.fulfilled, (state, action) => {
+            state.loading = false;
+            state.success= true;
+            state.error = null;
+            state.solicitacoes = state.solicitacoes.map((sol) => {
+
+                //tem que testar
+
+                if(sol.id === action.payload.id){
+                    return sol = action.payload
+                };
+                return sol;
+            })
+            state.message = "Solicitação deletada com sucesso!"
+        })
+        .addCase(updateSolicitacao.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+            state.solicitacao = {};
+        })
     }
     
 })

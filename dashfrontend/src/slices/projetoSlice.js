@@ -14,7 +14,7 @@ const initialState = {
 //slice get all projetos
 export const getAllProjetos = createAsyncThunk("projeto/getall", async (_,thunkAPI) => {
     const token = JSON.parse(localStorage.getItem("token"));
-    debugger;
+    
     const data = await projetoService.getProjetos(token);
     return data;
 })

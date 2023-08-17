@@ -33,7 +33,7 @@ function useEditModal() {
             <div className="flex justify-end ">
                 <FiX onClick={closeEditModal}/>
             </div>
-           <Form solicitacao={selectedItem}/>
+           <Form solicitacao={selectedItem} mode='edit'/>
          
         </div>
       </div>

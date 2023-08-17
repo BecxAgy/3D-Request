@@ -50,11 +50,28 @@ import { api, requestConfig } from "../utils/config"
    }
  }
 
+//edit method
+const updateSolictacao = async (id, data, token) => {
+   const config = requestConfig("PUT", data, token)
+
+   try{
+      debugger
+      const res = await fetch(api + "/solicitacao/" + id, config)
+         .then((res) => res.json())
+         .catch((err)=> err);
+
+      return res;
+
+   }catch(error){
+      console.log(error);
+   }
+}
 
  const solicitacaoService = {
     getSolicitacoes,
     createSolicitacao, 
     deleteSolicitacao,
+    updateSolictacao
  }
 
 

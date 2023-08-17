@@ -6,7 +6,7 @@ import { api, requestConfig } from "../utils/config"
     const config = requestConfig("GET", null, token);
 
    try{
-      debugger;
+      
       const res = await fetch(api + "/projeto", config)
       .then((res) => res.json())
       .catch(err => err);

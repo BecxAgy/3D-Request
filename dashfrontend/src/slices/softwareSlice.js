@@ -15,7 +15,7 @@ const initialState = {
 //slice get all softwares
 export const getAllSoftwares = createAsyncThunk("software/getall", async (_,thunkAPI) => {
     const token = JSON.parse(localStorage.getItem("token"));
-    debugger;
+    
     const data = await softwareService.getSoftwares(token);
     return data;
 })
