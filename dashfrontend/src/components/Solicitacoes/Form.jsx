@@ -15,7 +15,7 @@ import { useHistory, useNavigate } from 'react-router-dom';
 
 
 
-function Form() {
+function Form({solicitacao}) {
   const {register, handleSubmit, formState : {errors}} = useForm();
   const dispatch = useDispatch();
   const {projetos} = useSelector((state) => state.projeto);
@@ -57,26 +57,26 @@ function Form() {
     <form className=" mt-8 mb-2" >
 
       <div className="grid md:grid-cols-1 gap-6 "> 
-            <Input color='orange' size="lg" label="SPEC" {...register("especificacao")} />
+            <Input color='orange' size="lg" label="SPEC" defaultValue={solicitacao?.especificacao} {...register("especificacao")} />
             <div className="grid md:grid-rows-2 sm:grid-rows-1 gap-6">
-                <Input color='orange' size="lg" label="Componente" {...register("componente")} required minLength={5}/> 
-                <ButtonFilter label={"Status"} dataOptions={statuses} register={register("statusId") } required/>
+                <Input color='orange' size="lg" label="Componente" defaultValue={solicitacao?.componente} {...register("componente")} /> 
+                <ButtonFilter label={"Status"} dataOptions={statuses}  register={register("statusId") } defaultValue={solicitacao?.statusId} />
             </div>
 
            <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-6">
-                <Textarea color='orange' label='Pendência' {...register("pendencia")}></Textarea>
+                <Textarea color='orange' label='Pendência' {...register("pendencia")} defaultValue={solicitacao?.pendencia}></Textarea>
 
                 <div className="grid md:grid-rows-2 sm:grid-rows-1 gap-6">
-                  <ButtonFilter  label={"PJ"} dataOptions={projetos} register={register("projetoId")}/>
-                  <ButtonFilter label={"Software"} dataOptions={softwares} register={register("softwareId")} />
+                  <ButtonFilter  label={"PJ"} dataOptions={projetos} register={register("projetoId")} defaultValue={solicitacao?.projetoId} />
+                  <ButtonFilter label={"Software"} dataOptions={softwares} register={register("softwareId")} defaultValue={solicitacao?.softwareId} />
                 </div>          
            </div>
               <div className="grid md:grid-cols-3 sm:grid-cols-1 gap-4 ">
-                <Input color='orange' size="lg" label="DN-01" {...register("dn_01")}/>
-                <Input color='orange' size="lg" label="DN-02" {...register("dn_02")} />
-                <Input color='orange'  size="lg" label="DN-03" {...register("dn_03")} /> 
+                <Input color='orange' size="lg" label="DN-01" {...register("dn_01")} defaultValue={solicitacao?.dn_01}/>
+                <Input color='orange' size="lg" label="DN-02" {...register("dn_02")} defaultValue={solicitacao?.dn_02}/>
+                <Input color='orange'  size="lg" label="DN-03" {...register("dn_03")}  defaultValue={solicitacao?.dn_03}/> 
             </div>
-           <Textarea color='orange' label='Observação' {...register("observacao")}></Textarea>       
+           <Textarea color='orange' label='Observação' {...register("observacao")} defaultValue={solicitacao?.observacao}></Textarea>       
         
     </div>
     

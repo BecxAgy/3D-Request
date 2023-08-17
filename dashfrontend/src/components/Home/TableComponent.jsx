@@ -8,6 +8,7 @@ import { deleteSolicitacao, getAllSolicitacoes } from '../../slices/solicitacaoS
 import { useEffect } from 'react';
 import usePagination from '../../hooks/usePagination'
 import useDeleteModal from '../../hooks/useDeleteModal';
+import useEditModal from '../../hooks/useEditModal';
 
 
 
@@ -29,6 +30,7 @@ function TableComponent() {
   } = usePagination(solicitacoes);
   //hook for modal delete
   const { openDeleteModal, DeleteModal } = useDeleteModal();
+  const {openEditModal, EditModal } = useEditModal()
 
   
 
@@ -88,7 +90,7 @@ function TableComponent() {
                   {solicitacao.solicitante && solicitacao.solicitante["name"] }
                 </TableCell> 
                 
-                <TableCell className="px-3 py-4 text-right"  >
+                <TableCell className="px-3 py-4 text-right" onClick={()=> openEditModal(solicitacao)} >
                   <a href="#" className="font-medium text-orange-600 dark:text-orange-500 hover:underline">
                     <FiEdit />
                   </a>
@@ -122,7 +124,7 @@ function TableComponent() {
     }
      
     <DeleteModal />
-    
+    <EditModal/>
   </div>
 );
 
