@@ -35,16 +35,17 @@ export const createSolicitacao = createAsyncThunk("solicitacao/create", async (s
 
 export const deleteSolicitacao = createAsyncThunk("solicitacao/delete", async(id, thunkAPI) => {
     const token = JSON.parse(localStorage.getItem("token"));
-    debugger
+    debugger;
     const data = await solicitacaoService.deleteSolicitacao(id, token);
 
     if(data.erro){
-        return thunkAPI.rejectWithValue(data.erro)
+        return thunkAPI.rejectWithValue(data.erro);
     }
+      return data;
 })
 
 export const solicitacaoSlice = createSlice({
-    name:"solicitacao",
+    name: "solicitacao",
     initialState,
     reducers: {
         resetMessage: (state) => {
@@ -90,10 +91,8 @@ export const solicitacaoSlice = createSlice({
             state.loading = false;
             state.success= true;
             state.error = null;
-            
-            //adicionando no primeiro lugar do array
             state.solicitacoes = state.solicitacoes.filter((solicitacao) => {
-                console.log(action.payload);
+                //console.log(action.payload);
                 return solicitacao.id !== action.payload.id
             })
             state.message = "Solicitação deletada com sucesso!"
