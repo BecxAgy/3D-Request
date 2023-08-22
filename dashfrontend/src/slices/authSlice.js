@@ -91,7 +91,7 @@ async () => {
                 state.loading = false;
                 state.success= true;
                 state.error = null;
-                state.user = action.payload;
+                state.user = null;
             })
             .addCase(register.rejected, (state, action) => {
                 state.loading = false;

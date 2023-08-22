@@ -1,3 +1,4 @@
+import { redirect } from "react-router";
 import { api, requestConfig } from "../utils/config";
 
 //register user
@@ -10,10 +11,7 @@ const register = async(user) => {
         .then((res) => res.json())
         .catch((err)=> err)
 
-        if(res.success){
-            localStorage.setItem("user", JSON.stringify(res.data));
-            
-        }
+      
         return res;
 
     }catch(error){

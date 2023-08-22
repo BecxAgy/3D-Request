@@ -8,7 +8,7 @@ import Form from '../components/Solicitacoes/Form'
 function useEditModal() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const dispatch = useDispatch();
+ 
 
   function openEditModal(item) {
     setSelectedItem(item);
@@ -33,7 +33,8 @@ function useEditModal() {
             <div className="flex justify-end ">
                 <FiX onClick={closeEditModal}/>
             </div>
-           <Form solicitacao={selectedItem} mode='edit'/>
+           <Form solicitacao={selectedItem} mode='edit' setModal={setIsEditModalOpen}  open={isEditModalOpen}/>
+          
          
         </div>
       </div>

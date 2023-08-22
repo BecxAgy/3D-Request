@@ -44,17 +44,21 @@ export const deleteSolicitacao = createAsyncThunk("solicitacao/delete", async(id
       return data;
 });
 
-export const updateSolicitacao =createAsyncThunk("solicitacao/update", async (solicitacao, id, thunkAPI) => {
-    const token = JSON.parse(localStorage.getItem("token"));
-    debugger
-    const data = await solicitacaoService.updateSolictacao(id, solicitacao, token);
 
-    if(data.erro){
-        return thunkAPI.rejectWithValue(data.erro);
+export const updateSolicitacao = createAsyncThunk("solicitacao/update", async (data, thunkAPI) => {
+    const { id, solicitacao } = data; // Destructure os valores do objeto data
+    const token = JSON.parse(localStorage.getItem("token"));
+    console.log(solicitacao);
+
+    const response = await solicitacaoService.updateSolictacao(id, solicitacao, token);
+
+    if (response.error) {
+        return thunkAPI.rejectWithValue(response.error);
     }
 
-    return data;
+    return response;
 });
+
 
 export const solicitacaoSlice = createSlice({
     name: "solicitacao",
@@ -131,7 +135,7 @@ export const solicitacaoSlice = createSlice({
                 };
                 return sol;
             })
-            state.message = "Solicitação deletada com sucesso!"
+            state.message = "Solicitação editada com sucesso!"
         })
         .addCase(updateSolicitacao.rejected, (state, action) => {
             state.loading = false;

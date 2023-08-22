@@ -3,8 +3,6 @@ import Input from "./Auth/Input";
 import {login, reset} from "../slices/authSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import ButtonLogin from './Auth/ButtonLogin';
-import { Button } from '@mui/material';
-import Message from './Message';
 
 
 
@@ -35,7 +33,10 @@ export default function Login(){
 
 
     return(
-        <div className="flex items-center justify-center ">
+        <div>
+           
+            <div className="flex items-center justify-center ">
+            
 
             <form onSubmit= {(e) => handleSubmit(e)} className="px-5 pb-8 mb-3 w-full md:w-1/2 lg:w-1/3">
                 
@@ -67,12 +68,14 @@ export default function Login(){
                     
                     {!loading && <ButtonLogin text={'Entrar'}/>}
                     {loading && <ButtonLogin text={'Aguarde...'}/>}
-                    {error && <Message msg={error} />}
+                    
                 
 
         
 
             </form>
         </div>
+        </div>
+       
     )
 }

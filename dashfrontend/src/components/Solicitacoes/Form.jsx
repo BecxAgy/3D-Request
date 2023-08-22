@@ -11,58 +11,68 @@ import { getAllStatus } from '../../slices/statusSlice';
 import { getAllSoftwares } from '../../slices/softwareSlice';
 import {useForm} from 'react-hook-form';
 import { createSolicitacao, updateSolicitacao } from '../../slices/solicitacaoSlice';
-import { useHistory, useNavigate } from 'react-router-dom';
+import {useNavigate}  from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
+import { FiArrowLeft } from 'react-icons/fi';
 
 
 
-function Form({solicitacao, mode}) {
+
+function Form({solicitacao, mode, setModal, open}) {
   const {register, handleSubmit, formState : {errors}} = useForm();
   const dispatch = useDispatch();
   const {projetos} = useSelector((state) => state.projeto);
   const {statuses} = useSelector((state) => state.status);
   const {softwares} = useSelector((state) => state.software);
-  const {user, loading} = useSelector((state) => state.user);
   const{
     solicitacoes,
-    loading : loadingSolicitacao,
-    error: errorSolicitacao,
-    message
+    loading ,
   } = useSelector((state) => state.solicitacao);
   const navigate = useNavigate();
- 
-  //get data for select labels
-  useEffect(() => {
-    dispatch(getAllStatus());
-    dispatch(getAllProjetos());
-    dispatch(getAllSoftwares());
-  }, [dispatch]);
 
-  //post solicitacao
+  function redirect(){
+    console.log("entro")
+    if(mode === 'edit'){
+      setModal(!open);
+    }else{
+      navigate('/');
+    }
+  }
+
+  //post and edit solicitacao
   const onSubmit = (data) =>
   {
       data.statusId = parseInt(data.statusId)
       data.softwareId = parseInt(data.softwareId)
       
-      
-      if(mode === 'edit'){
+      if (mode === 'edit') {
         data.executorId = JSON.parse(localStorage.getItem("user")).id;
         data.solicitanteId = solicitacao.solicitanteId;
-        console.log(data, solicitacao.id);
-        
-        dispatch(updateSolicitacao(data, solicitacao.id));
-
-      }else{
+        const updatedData = {
+            id: solicitacao.id, 
+            solicitacao: data, // Os dados atualizados da solicitação
+        };
+    
+        dispatch(updateSolicitacao(updatedData))
+    }else{
         data.solicitanteId = JSON.parse(localStorage.getItem("user")).id;
-       //dispatch(createSolicitacao(data));
+       dispatch(createSolicitacao(data));
       }
        
-
+      redirect()
   }
-
+  
+  
+//get data for select labels
+useEffect(() => {
+  dispatch(getAllStatus());
+  dispatch(getAllProjetos());
+  dispatch(getAllSoftwares());
+}, [dispatch]);
 
   return (
     <form className=" mt-8 mb-2" >
-
+      
       <div className="grid md:grid-cols-1 gap-6 "> 
             <Input color='orange' size="lg" label="SPEC" defaultValue={solicitacao?.especificacao} {...register("especificacao")} />
             <div className="grid md:grid-rows-2 sm:grid-rows-1 gap-6">
@@ -78,6 +88,8 @@ function Form({solicitacao, mode}) {
                   <ButtonFilter label={"Software"} dataOptions={softwares} register={register("softwareId")} defaultValue={solicitacao?.softwareId} />
                 </div>          
            </div>
+
+           
               <div className="grid md:grid-cols-3 sm:grid-cols-1 gap-4 ">
                 <Input color='orange' size="lg" label="DN-01" {...register("dn_01")} defaultValue={solicitacao?.dn_01}/>
                 <Input color='orange' size="lg" label="DN-02" {...register("dn_02")} defaultValue={solicitacao?.dn_02}/>
@@ -86,8 +98,10 @@ function Form({solicitacao, mode}) {
            <Textarea color='orange' label='Observação' {...register("observacao")} defaultValue={solicitacao?.observacao}></Textarea>       
         
     </div>
+    {!loading && <Button className=' mr-2 mt-6' size='lg' color='orange' onClick={()=> redirect()}><FiArrowLeft/> </Button>}
+    {!loading && <Button className='w-96 mt-6' size='lg' color='orange' onClick={()=> handleSubmit(onSubmit)()}> Cadastrar </Button>}
     
-    <Button className='w-96 mt-6' size='lg' color='orange' onClick={()=> handleSubmit(onSubmit)().then(navigate("/"))}>{loadingSolicitacao  ? 'Aguarde...' : 'CADASTRAR'}</Button>
+    {loading && <CircularProgress/> }
     
     
   </form>

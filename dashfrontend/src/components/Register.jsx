@@ -4,6 +4,7 @@ import {register, reset} from "../slices/authSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import ButtonLogin from './Auth/ButtonLogin';
 import Message from './Message';
+import { useNavigate } from 'react-router';
 
 export default function Register(){
     const [name, setName] =useState("");
@@ -13,6 +14,8 @@ export default function Register(){
     const dispatch = useDispatch();
     const {loading, error} = useSelector((state) => state.auth)
     const [errorPassword, setErrorPassword ] = useState(false);
+    const navigate = useNavigate();
+   
 
   const handleSubmit= (e) => {
     e.preventDefault();
@@ -31,7 +34,8 @@ export default function Register(){
       
 
        dispatch(register(user));
-        
+       
+
     }
      
   }
