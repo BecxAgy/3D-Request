@@ -10,13 +10,14 @@ import usePagination from '../../hooks/usePagination'
 import useDeleteModal from '../../hooks/useDeleteModal';
 import useEditModal from '../../hooks/useEditModal';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useNavigate } from 'react-router';
 
 
 function TableComponent() {
 
   const dispatch = useDispatch();
   const { solicitacoes, loading} = useSelector((state) => state.solicitacao);
-
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getAllSolicitacoes());
   }, [dispatch]);
@@ -64,7 +65,7 @@ function TableComponent() {
                 paginatedData :  solicitacoes
               ).map((solicitacao, index) => (
               
-                <TableRow key={index} className='bg-white' >
+                <TableRow key={index} className='bg-white' onClick={()=> navigate(`/solicitacao/${solicitacao.id}`)}>
                   <TableCell className='p-3 text-sm  font-bold whitespace-nowrap'>
                     {solicitacao.especificacao}
                   </TableCell>
@@ -84,7 +85,7 @@ function TableComponent() {
                     {solicitacao.createdAt}
                   </TableCell>     
                   <TableCell className='p-3 text-sm text-gray-700 whitespace-nowrap'>
-                    <span className={`p-1.5 font-medium uppercase tracking-wider rounded-lg bg-opacity-50 bg-blue-500 text-blue-600`}>
+                    <span className={`p-1.5 font-medium uppercase tracking-wider rounded-lg bg-opacity-50 ${solicitacao.statusSolicitacao && solicitacao.statusSolicitacao["descricao"] } bg-blue-500 text-blue-600`}>
                       {solicitacao.statusSolicitacao && solicitacao.statusSolicitacao["descricao"] }
                     </span>  
                   </TableCell>

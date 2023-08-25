@@ -8,6 +8,7 @@ import { useAuth } from "../hooks/useAuth";
 import { useSelector } from "react-redux";
 import RegisterPage from "../pages/RegisterPage";
 import RegisterSolicitacao from "../pages/RegisterSolicitacao";
+import SolicitacaoDetails from "../pages/Solicitacoes/SolicitacaoDetails";
 
 
 
@@ -53,10 +54,11 @@ export function MyRoutes(){
                     <div>
                         <Routes>
                             <Route path="/" element={auth ? <Home/> : <Navigate to="/login"/>}/>
+                            <Route path="/solicitacoes/:id" element={ auth ? <SolicitacaoDetails/> :<Navigate to="/login"/> } />
                             <Route path="/historic" element={auth ? <Historic/> : <Navigate to="/login"/>}/>
                             <Route path="/user-profile" element={auth ? <Profile/> : <Navigate to="/login"/>}/>
                             <Route path="/login" element={!auth ? <LoginPage/> : <Navigate to="/"/>}/>
-                            <Route path="/register" element={!auth ? <RegisterPage/> : <Navigate to="/"/>}/>
+                            <Route path="/register" element={!auth ? <RegisterPage/> : <Navigate to="/login"/>}/>
                             <Route path="/form-solicitacao" element={auth ? <RegisterSolicitacao/> : <Navigate to="/login"/>}/>
                         </Routes>
                     </div>
