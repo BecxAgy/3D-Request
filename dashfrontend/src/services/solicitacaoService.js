@@ -15,7 +15,22 @@ import { api, requestConfig } from "../utils/config"
       return res;
 
    }catch(error){
-         console.log(error);
+      console.log(error);
+   }
+ }
+
+ //GET BY ID
+ const getSolicitacaoById = async (id, token) => {
+   const config = requestConfig("GET", null, token);
+
+   try {
+      const res  = await fetch(api + '/solicitacao/'+ id , config)
+      .then((res) => res.json())
+      .catch((err)=> err);
+
+      return res;
+   } catch (error) {
+      console.log(error);
    }
  }
 
@@ -71,7 +86,8 @@ const updateSolictacao = async (id, data, token) => {
     getSolicitacoes,
     createSolicitacao, 
     deleteSolicitacao,
-    updateSolictacao
+    updateSolictacao, 
+    getSolicitacaoById
  }
 
 
