@@ -14,7 +14,7 @@ import { createSolicitacao, updateSolicitacao } from '../../slices/solicitacaoSl
 import {useNavigate}  from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 import { FiArrowLeft } from 'react-icons/fi';
-
+import ErrorMessage from './ErrorMessage';
 
 
 
@@ -42,10 +42,11 @@ function Form({solicitacao, mode, setModal, open}) {
   //post and edit solicitacao
   const onSubmit = (data) =>
   {
-      data.statusId = parseInt(data.statusId)
+      
       data.softwareId = parseInt(data.softwareId)
       
       if (mode === 'edit') {
+        data.statusId = parseInt(data.statusId)
         data.executorId = JSON.parse(localStorage.getItem("user")).id;
         data.solicitanteId = solicitacao.solicitanteId;
         const updatedData = {
@@ -73,14 +74,28 @@ useEffect(() => {
   return (
     <form className=" mt-8 mb-2" >
       
-      <div className="grid md:grid-cols-1 gap-6 "> 
-            <Input color='orange' size="lg" label="SPEC" defaultValue={solicitacao?.especificacao} {...register("especificacao")} />
-            <div className="grid md:grid-rows-2 sm:grid-rows-1 gap-6">
-                <Input color='orange' size="lg" label="Componente" defaultValue={solicitacao?.componente} {...register("componente")} /> 
-                <ButtonFilter label={"Status"} dataOptions={statuses}  register={register("statusId") } defaultValue={solicitacao?.statusId} />
+      <div className="grid md:grid-cols-1 gap-4 "> 
+            <Input name='especificacao' color='orange' label="SPEC" defaultValue={solicitacao?.especificacao} {...register("especificacao",
+            {
+              required: "O campo SPEC é obrigatório",
+              
+            } )} /> 
+            <ErrorMessage error={errors.especificacao?.message}/>
+
+            <div className={`grid  sm:grid-rows-1 gap-4 ${mode ==='edit' ? "md:grid-rows-2"  : "md:grid-rows-1"}`}>
+                <Input  name='componente' color='orange' label="Componente" defaultValue={solicitacao?.componente} {...register("componente",
+                {
+                  required: "O campo componente é obrigatório",
+                  
+                } ) } /> 
+                <ErrorMessage error={errors.componente?.message}/>
+                {
+                  (mode === 'edit') && <ButtonFilter label={"Status"} dataOptions={statuses}  register={register("statusId") } defaultValue={(mode === 'edit') ? solicitacao?.statusId : 4} required /> 
+                }
+                
             </div>
 
-           <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-6">
+           <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
                 <Textarea color='orange' label='Pendência' {...register("pendencia")} defaultValue={solicitacao?.pendencia}></Textarea>
 
                 <div className="grid md:grid-rows-2 sm:grid-rows-1 gap-6">
@@ -91,12 +106,23 @@ useEffect(() => {
 
            
               <div className="grid md:grid-cols-3 sm:grid-cols-1 gap-4 ">
-                <Input color='orange' size="lg" label="DN-01" {...register("dn_01")} defaultValue={solicitacao?.dn_01}/>
+                  <div className={`grid ${errors?.dn_01 ? "md:grid-rows-2"  : "md:grid-rows-1"}`}>
+                    <Input name="dn_01" color='orange' size="lg" label="DN-01" {...register("dn_01",
+                    {
+                      required: "O campo DN-01 é obrigatório",
+                      
+                    })} defaultValue={solicitacao?.dn_01}/>
+                    <ErrorMessage error={errors.dn_01?.message}/>
+                  </div>
                 <Input color='orange' size="lg" label="DN-02" {...register("dn_02")} defaultValue={solicitacao?.dn_02}/>
                 <Input color='orange'  size="lg" label="DN-03" {...register("dn_03")}  defaultValue={solicitacao?.dn_03}/> 
             </div>
-           <Textarea color='orange' label='Observação' {...register("observacao")} defaultValue={solicitacao?.observacao}></Textarea>       
-        
+           <Textarea name='observacao' color='orange' label='Observação' {...register("observacao", {
+              message: "O campo observação pode ter no máximo 255 caracteres",
+              maxLength: 255
+                      
+            })} defaultValue={solicitacao?.observacao}></Textarea>       
+            <ErrorMessage error={errors.observacao?.message}/>
     </div>
     {!loading && <Button className=' mr-2 mt-6' size='lg' color='orange' onClick={()=> redirect()}><FiArrowLeft/> </Button>}
     {!loading && <Button className='w-96 mt-6' size='lg' color='orange' onClick={()=> handleSubmit(onSubmit)()}> Cadastrar </Button>}
