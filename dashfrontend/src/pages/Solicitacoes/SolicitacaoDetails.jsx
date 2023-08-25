@@ -1,8 +1,11 @@
 import React from 'react'
+import { useParams } from 'react-router'
 
 function SolicitacaoDetails() {
+    const {id} = useParams();
+
   return (
-    <div>SolicitacaoDetails</div>
+    <div><p>{id}</p></div>
   )
 }
 

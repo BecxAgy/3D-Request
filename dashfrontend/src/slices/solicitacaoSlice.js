@@ -20,6 +20,14 @@ export const getAllSolicitacoes = createAsyncThunk("solicitacao/getall", async (
     return data;
 });
 
+//slice getbyid
+export const getSolicitacaoById = createAsyncThunk ("solicitacao/getbyid", async (id, thunkAPI ) => {
+    const token = JSON.parse(localStorage.getItem("token")); 
+
+    const data = await solicitacaoService.getSolicitacaoById(id, token);
+    return data;
+});
+
 export const createSolicitacao = createAsyncThunk("solicitacao/create", async (solicitacao, thunkAPI) => {
     const token = JSON.parse(localStorage.getItem("token"));
 
@@ -141,6 +149,16 @@ export const solicitacaoSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
             state.solicitacao = {};
+        })
+        .addCase(getSolicitacaoById.pending, (state) => {
+            state.loading = true;
+            state.error = false;
+        })
+        .addCase(getSolicitacaoById.fulfilled, (state, action) => {
+            state.loading = false;
+            state.success= true;
+            state.error = null;
+            state.solicitacao = action.payload;
         })
     }
     

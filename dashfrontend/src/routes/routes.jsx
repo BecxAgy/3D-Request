@@ -54,7 +54,7 @@ export function MyRoutes(){
                     <div>
                         <Routes>
                             <Route path="/" element={auth ? <Home/> : <Navigate to="/login"/>}/>
-                            <Route path="/solicitacoes/:id" element={ auth ? <SolicitacaoDetails/> :<Navigate to="/login"/> } />
+                            <Route path="/solicitacao/:id" element={ auth ? <SolicitacaoDetails/> :<Navigate to="/login"/> } />
                             <Route path="/historic" element={auth ? <Historic/> : <Navigate to="/login"/>}/>
                             <Route path="/user-profile" element={auth ? <Profile/> : <Navigate to="/login"/>}/>
                             <Route path="/login" element={!auth ? <LoginPage/> : <Navigate to="/"/>}/>
