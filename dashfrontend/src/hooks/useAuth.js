@@ -4,7 +4,7 @@ import { useStateContext } from '../contexts/ContextProvider';
 
 export const useAuth = () => {
     const  { user } = useSelector ((state =>state.auth));
-    const {setIsAuth, setActiveMenu, setUser} = useStateContext();
+    const { setActiveMenu} = useStateContext();
     const [auth, setAuth] = useState (false);
     const [loading, setLoading] = useState(true);
     
@@ -13,11 +13,11 @@ export const useAuth = () => {
     useEffect(() => {
         if(user) {
             setAuth(true)
-            setIsAuth(true)
+           
   
         }else{
             setAuth(false)
-            setIsAuth(false)
+            
             setActiveMenu(false);
         }
 

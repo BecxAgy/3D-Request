@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const usePagination = (data, initialRowsPerPage = 10) => {
+const usePagination = (data = [], initialRowsPerPage = 10) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(initialRowsPerPage);
 

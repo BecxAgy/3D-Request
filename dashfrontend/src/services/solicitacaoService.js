@@ -22,7 +22,7 @@ import { api, requestConfig } from "../utils/config"
  //GET BY ID
  const getSolicitacaoById = async (id, token) => {
    const config = requestConfig("GET", null, token);
-
+   debugger
    try {
       const res  = await fetch(api + '/solicitacao/'+ id , config)
       .then((res) => res.json())

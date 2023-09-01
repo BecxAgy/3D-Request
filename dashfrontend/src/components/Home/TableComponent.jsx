@@ -18,6 +18,8 @@ function TableComponent() {
   const dispatch = useDispatch();
   const { solicitacoes, loading} = useSelector((state) => state.solicitacao);
   const navigate = useNavigate();
+
+  
   useEffect(() => {
     dispatch(getAllSolicitacoes());
   }, [dispatch]);
@@ -82,29 +84,35 @@ function TableComponent() {
                     {solicitacao.dn_03}
                   </TableCell>
                   <TableCell className='p-3 text-sm text-gray-700 whitespace-nowrap'>
-                    {solicitacao.createdAt}
+                    {solicitacao.criadoEm}
                   </TableCell>     
                   <TableCell className='p-3 text-sm text-gray-700 whitespace-nowrap'>
-                    <span className={`p-1.5 font-medium uppercase tracking-wider rounded-lg bg-opacity-50 ${solicitacao.statusSolicitacao && solicitacao.statusSolicitacao["descricao"] } bg-blue-500 text-blue-600`}>
-                      {solicitacao.statusSolicitacao && solicitacao.statusSolicitacao["descricao"] }
+                    <span className={`p-1.5 font-medium uppercase tracking-wider rounded-lg bg-opacity-50 ${solicitacao.Status } bg-blue-500 text-blue-600`}>
+                      {solicitacao.Status }
                     </span>  
                   </TableCell>
                   <TableCell className='p-3 text-sm text-gray-700'>
-                    {solicitacao.projetoSolicitacao && solicitacao.projetoSolicitacao["pj"] }
+                    { solicitacao.pj }
                   </TableCell>
                   <TableCell className='p-3 text-sm text-gray-700'>
-                    {solicitacao.softwareSolicitacao && solicitacao.softwareSolicitacao["nome"] }
+                    {solicitacao.Software }
                   </TableCell>
                   <TableCell className='p-3 text-sm text-gray-700'>
-                    {solicitacao.solicitante && solicitacao.solicitante["name"] }
+                    { solicitacao.Solicitante }
                   </TableCell> 
                   
-                  <TableCell className="px-3 py-4 text-right" onClick={()=> openEditModal(solicitacao)} >
+                  <TableCell className="px-3 py-4 text-right" onClick={(e)=> {
+                    e.stopPropagation();
+                    openEditModal(solicitacao)}
+                    } >
                     <a href="#" className="font-medium text-orange-600 dark:text-orange-500 hover:underline">
                       <FiEdit />
                     </a>
                   </TableCell>
-                  <TableCell className="px-3 py-4 text-right" onClick={()=> openDeleteModal(solicitacao)}>
+                  <TableCell className="px-3 py-4 text-right" onClick={(e)=> {
+                    e.stopPropagation();
+                    openDeleteModal(solicitacao)}
+                    }>
                     <a href="#" className="font-medium text-orange-600 dark:text-orange-500 hover:underline">
                       <FiTrash />
                     </a>

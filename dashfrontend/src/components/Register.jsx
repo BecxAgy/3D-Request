@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ButtonLogin from './Auth/ButtonLogin';
 import Message from './Message';
 import { useNavigate } from 'react-router';
+import AlertsMessage from './AlertsMessage';
 
 export default function Register(){
     const [name, setName] =useState("");
@@ -12,7 +13,7 @@ export default function Register(){
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const dispatch = useDispatch();
-    const {loading, error} = useSelector((state) => state.auth)
+    const {loading} = useSelector((state) => state.auth)
     const [errorPassword, setErrorPassword ] = useState(false);
     const navigate = useNavigate();
    
@@ -104,8 +105,8 @@ export default function Register(){
                     
                     {!loading && <ButtonLogin text={'Registrar'}/>}
                     {loading && <ButtonLogin text={'Aguarde...'}/>}
-                    {error && <Message msg={error} />}
-                    {errorPassword && <Message msg='As senhas são diferentes. Tente novamente!'/>}
+                  
+                    {errorPassword && <AlertsMessage  type={'warning'} message={'As senhas são diferentes. Tente novamente!'}/>}
             </form>
         </div>
     )

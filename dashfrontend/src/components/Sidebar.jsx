@@ -3,13 +3,15 @@ import { Link, NavLink } from 'react-router-dom';
 import { SiShopware } from 'react-icons/si';
 import {links} from "../data/dummy"
 import { useStateContext } from '../contexts/ContextProvider';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout, reset } from '../slices/authSlice';
+import { useAuth } from '../hooks/useAuth';
 
 
 function Sidebar() {
   const {activeMenu, isAuth, setActiveMenu} = useStateContext();
+  const {auth} = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -23,12 +25,12 @@ function Sidebar() {
     md:overflow-hidden overflow-auto 
     md:hover:overflow-auto pb-10'>
 
-      {activeMenu & isAuth ? 
+      {activeMenu & auth ? 
       (
         <>
           <div className='flex justify-between
           items-center'>
-            <Link to="/"  className="items-center gap-3 
+            <Link   className="items-center gap-3 
             ml-3 mt-4 flex text-xl font-extrabold 
             tracking-tight dark:text-white text-slate-900" onClick={() => setActiveMenu(!activeMenu)}>
               <SiShopware /> <span>Kempetro</span>

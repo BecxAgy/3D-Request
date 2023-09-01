@@ -18,12 +18,9 @@ export const register = createAsyncThunk(
     async (user, thunkAPI) => {
         
         const data = await authService.register(user);
-
         //check errors
-        if(!data.success){
-            return thunkAPI.rejectWithValue(data.message)
-        }
-
+        if(!data.success) return thunkAPI.rejectWithValue(data.message)
+        
         return data;
     }
 )
@@ -77,7 +74,7 @@ async () => {
                 state.error = action.payload;
                 state.user = null;
             })
-            .addCase(logout.fulfilled, (state, action) => {
+            .addCase(logout.fulfilled, (state) => {
                 state.loading = false;
                 state.success= true;
                 state.error = null;
@@ -87,7 +84,7 @@ async () => {
                 state.loading = true;
                 state.error = false;
             })
-            .addCase(register.fulfilled, (state, action) => {
+            .addCase(register.fulfilled, (state) => {
                 state.loading = false;
                 state.success= true;
                 state.error = null;

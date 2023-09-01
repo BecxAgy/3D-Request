@@ -99,7 +99,7 @@ useEffect(() => {
                 <Textarea color='orange' label='Pendência' {...register("pendencia")} defaultValue={solicitacao?.pendencia}></Textarea>
 
                 <div className="grid md:grid-rows-2 sm:grid-rows-1 gap-6">
-                  <ButtonFilter  label={"PJ"} dataOptions={projetos} register={register("projetoId")} defaultValue={solicitacao?.projetoId} />
+                  <ButtonFilter  label={"PJ"} dataOptions={projetos} register={register("projetoId")} defaultValue={solicitacao?.pj} />
                   <ButtonFilter label={"Software"} dataOptions={softwares} register={register("softwareId")} defaultValue={solicitacao?.softwareId} />
                 </div>          
            </div>
