@@ -12,10 +12,17 @@ const initialState = {
 
 
 //slice get all projetos
-export const getAllProjetos = createAsyncThunk("projeto/getall", async (_,thunkAPI) => {
+export const getAllProjetos = createAsyncThunk("projeto/getall", async (_, thunkAPI) => {
     const token = JSON.parse(localStorage.getItem("token"));
     
     const data = await projetoService.getProjetos(token);
+    return data;
+})
+
+export const createProjeto = createAsyncThunk("projeto/create", async (proj, thunkAPI) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    
+    const data = await projetoService.createProjeto(token, proj);
     return data;
 })
 
@@ -41,6 +48,24 @@ export const projetoSlice = createSlice({
             state.success= true;
             state.error = null;
             state.projetos = action.payload;
+        })
+        .addCase(createProjeto.pending, (state) => {
+            state.loading = true;
+            state.error = false;
+        })
+        .addCase(createProjeto.fulfilled, (state, action) => {
+            state.loading = false;
+            state.success= true;
+            state.error = null;
+            state.projeto = action.payload;
+            //adicionando no primeiro lugar do array
+            state.projetos.unshift(state.projeto);
+            state.message = "Projeto criado com sucesso!"
+        })
+        .addCase(createProjeto.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+            state.projeto = {};
         })
         
     }

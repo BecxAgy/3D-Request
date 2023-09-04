@@ -1,14 +1,16 @@
 import { Link } from 'react-router-dom'
 import React from 'react'
-
+import {FaChevronDown} from 'react-icons/fa'
+import { Select, Option } from "@material-tailwind/react";
 function ButtonAdd() {
   return (
-    <Link to="/form-solicitacao">
-        <button type="button"  className="text-white bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-600 font-medium rounded-lg text-sm px-5 py-3 text-center mr-2 mb-2">
-        Adicionar Solicitação
-      </button>
-    </Link>
-    
+    <div className="w-32">
+      <Select label="Adicionar">
+      <Link to='/form-solicitacao'><Option>Solicitacao</Option></Link>
+        <Link to='/form-projeto'><Option>Projeto</Option></Link>
+       
+      </Select>
+    </div>
   )
 }
 

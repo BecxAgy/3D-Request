@@ -19,8 +19,25 @@ import { api, requestConfig } from "../utils/config"
    }
  }
 
+ const createProjeto = async(token, data) => {
+    const config = requestConfig("POST", data, token);
+
+    try {
+      debugger;
+      const res = await fetch(api + "/projeto", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+      return res;
+
+    } catch (error) {
+      console.log(error);
+    }
+ }
+
  const projetoService = {
-   getProjetos
+   getProjetos, 
+   createProjeto
  }
 
  export default projetoService;

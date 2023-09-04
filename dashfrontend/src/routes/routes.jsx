@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import RegisterPage from "../pages/RegisterPage";
 import RegisterSolicitacao from "../pages/RegisterSolicitacao";
 import SolicitacaoDetails from "../pages/Solicitacoes/SolicitacaoDetails";
+import RegisterProjeto from "../pages/Projeto/RegisterProjeto";
 
 
 
@@ -60,6 +61,7 @@ export function MyRoutes(){
                             <Route path="/login" element={!auth ? <LoginPage/> : <Navigate to="/"/>}/>
                             <Route path="/register" element={!auth ? <RegisterPage/> : <Navigate to="/login"/>}/>
                             <Route path="/form-solicitacao" element={auth ? <RegisterSolicitacao/> : <Navigate to="/login"/>}/>
+                            <Route path="/form-projeto" element={auth ? <RegisterProjeto/> : <Navigate to="/login"/>}/>
                         </Routes>
                     </div>
                    
