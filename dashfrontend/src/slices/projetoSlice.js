@@ -59,7 +59,7 @@ export const projetoSlice = createSlice({
             state.error = null;
             state.projeto = action.payload;
             //adicionando no primeiro lugar do array
-            state.projetos.unshift(state.projeto);
+            state.projetos.push(state.projeto);
             state.message = "Projeto criado com sucesso!"
         })
         .addCase(createProjeto.rejected, (state, action) => {

@@ -21,7 +21,7 @@ import { api, requestConfig } from "../utils/config"
 
  const createProjeto = async(token, data) => {
     const config = requestConfig("POST", data, token);
-
+    
     try {
       debugger;
       const res = await fetch(api + "/projeto", config)
