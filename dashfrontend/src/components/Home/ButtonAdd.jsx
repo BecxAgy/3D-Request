@@ -5,7 +5,7 @@ import { Select, Option } from "@material-tailwind/react";
 function ButtonAdd() {
   return (
     <div className="w-32">
-      <Select label="Adicionar">
+      <Select  label="Adicionar">
       <Link to='/form-solicitacao'><Option>Solicitacao</Option></Link>
         <Link to='/form-projeto'><Option>Projeto</Option></Link>
        
