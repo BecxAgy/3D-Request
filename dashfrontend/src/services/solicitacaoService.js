@@ -1,4 +1,5 @@
 import { api, requestConfig } from "../utils/config"
+import authService from "./authService";
 
 //get method
  const getSolicitacoes = async(token) =>{
@@ -11,8 +12,14 @@ import { api, requestConfig } from "../utils/config"
       .then((res) => res.json())
       .catch(err => err);
 
-      console.log(res);
+
+      if(res.message === 'Token não encontrado' || res.message === 'Token inválido'){
+         authService.logout();
+         window.location.href = '/login';
+      }
       return res;
+
+
 
    }catch(error){
       console.log(error);
@@ -27,6 +34,11 @@ import { api, requestConfig } from "../utils/config"
       const res  = await fetch(api + '/solicitacao/'+ id , config)
       .then((res) => res.json())
       .catch((err)=> err);
+     
+      if(res.message === 'Token não encontrado' || res.message === 'Token inválido'){
+         authService.logout();
+         window.location.href = '/login';
+      }
 
       return res;
    } catch (error) {
@@ -44,6 +56,11 @@ import { api, requestConfig } from "../utils/config"
       .then((res) => res.json())
       .catch((err) => err);
 
+      if(res.message === 'Token não encontrado' || res.message === 'Token inválido'){
+         authService.logout();
+         window.location.href = '/login';
+      }
+
       return res;
    } catch (error) {
       console.log(error);
@@ -59,6 +76,10 @@ import { api, requestConfig } from "../utils/config"
          .then((res) => res.json())
          .catch((err) => err);
 
+         if(res.message === 'Token não encontrado' || res.message === 'Token inválido'){
+            authService.logout();
+            window.location.href = '/login';
+         }
       return res;
    }catch(error){
       console.log(error); 
@@ -74,6 +95,11 @@ const updateSolictacao = async (id, data, token) => {
       const res = await fetch(api + "/solicitacao/" + id, config)
          .then((res) => res.json())
          .catch((err)=> err);
+
+         if(res.message === 'Token não encontrado' || res.message === 'Token inválido'){
+            authService.logout();
+            window.location.href = '/login';
+         }
 
       return res;
 

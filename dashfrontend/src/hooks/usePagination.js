@@ -13,7 +13,8 @@ const usePagination = (data = [], initialRowsPerPage = 10) => {
     setPage(0);
   };
 
-  const paginatedData = data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  
+  const paginatedData = Array.isArray(data) ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : [];
 
   return {
     page,

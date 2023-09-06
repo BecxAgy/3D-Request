@@ -16,8 +16,13 @@ const initialState = {
 export const getAllSolicitacoes = createAsyncThunk("solicitacao/getall", async () => {
     const token = JSON.parse(localStorage.getItem("token"));
     debugger;
-    const data = await solicitacaoService.getSolicitacoes(token);
-    return data;
+
+    
+        const data = await solicitacaoService.getSolicitacoes(token);
+        return data;
+    
+  
+    
 });
 
 //slice getbyid
@@ -63,6 +68,7 @@ export const updateSolicitacao = createAsyncThunk("solicitacao/update", async (d
     if (response.error) {
         return thunkAPI.rejectWithValue(response.error);
     }
+    window.location.href = '/';
 
     return response;
 });

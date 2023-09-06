@@ -4,7 +4,7 @@ import './Table.css'
 import { Table, TableContainer, TableHead, TableRow, TableCell, TableBody, TablePagination } from '@mui/material';
 import { FiEdit, FiTrash } from 'react-icons/fi';
 import {useDispatch, useSelector} from "react-redux"
-import { deleteSolicitacao, getAllSolicitacoes } from '../../slices/solicitacaoSlice';
+import { getAllSolicitacoes } from '../../slices/solicitacaoSlice';
 import { useEffect } from 'react';
 import usePagination from '../../hooks/usePagination'
 import useDeleteModal from '../../hooks/useDeleteModal';
@@ -30,7 +30,7 @@ function TableComponent() {
     handleChangePage,
     handleChangeRowsPerPage,
     paginatedData
-  } = usePagination(solicitacoes);
+  } = usePagination(solicitacoes );
   //hook for modal delete
   const { openDeleteModal, DeleteModal } = useDeleteModal();
   const {openEditModal, EditModal } = useEditModal()
@@ -64,7 +64,7 @@ function TableComponent() {
             <TableBody>
               {(
                 rowsPerPage > 0 ? 
-                paginatedData :  solicitacoes
+                paginatedData :   Array.isArray(solicitacoes) ? solicitacoes : []
               ).map((solicitacao, index) => (
               
                 <TableRow key={index} className='bg-white' onClick={()=> navigate(`/solicitacao/${solicitacao.id}`)}>

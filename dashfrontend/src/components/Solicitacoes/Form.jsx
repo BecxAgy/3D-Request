@@ -124,8 +124,8 @@ useEffect(() => {
             })} defaultValue={solicitacao?.observacao}></Textarea>       
             <ErrorMessage error={errors.observacao?.message}/>
     </div>
-    {!loading && <Button className=' mr-2 mt-6' size='lg' color='orange' onClick={()=> redirect()}><FiArrowLeft/> </Button>}
-    {!loading && <Button className='w-96 mt-6' size='lg' color='orange' onClick={()=> handleSubmit(onSubmit)()}> Cadastrar </Button>}
+    {!loading && <Button className='bg-orange-600 mr-2 mt-6' size='lg' onClick={()=> redirect()}><FiArrowLeft/> </Button>}
+    {!loading && <Button className='bg-orange-600 w-96 mt-6' size='lg' color='orange' onClick={()=> handleSubmit(onSubmit)()}> Cadastrar </Button>}
     
     {loading && <CircularProgress/> }
     
