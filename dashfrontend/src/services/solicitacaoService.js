@@ -96,7 +96,7 @@ const updateSolictacao = async (id, data, token) => {
          .then((res) => res.json())
          .catch((err)=> err);
 
-         if(res.message === 'Token não encontrado' || res.message === 'Token inválido'){
+         if(res.message === "Token não encontrado" || res.message === "Token Inválido"){
             authService.logout();
             window.location.href = '/login';
          }
