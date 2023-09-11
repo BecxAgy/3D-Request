@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import HeaderMain from '../components/HeaderMain';
 import TableComponent from '../components/Home/TableComponent';
 import ButtonAdd from '../components/Home/ButtonAdd';
@@ -11,6 +11,8 @@ import MenuPopupState from '../components/MenuPopupState';
 
 const Home = () => {
   const {  error} = useSelector((state) => state.solicitacao)
+  const [search, setSearch] = useState("");
+
   return (
     
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
@@ -22,11 +24,11 @@ const Home = () => {
           <MenuPopupState/>
         </div>
         <div className='m-2' >
-        <SearchInput/>
+        <SearchInput search={search} setSearch={setSearch}/>
         </div>
          
       </div>   
-      <TableComponent/>
+      <TableComponent search={search}/>
     </div>
   
   );

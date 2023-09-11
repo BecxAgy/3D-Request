@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { columns} from '../../data/dummy'
 import './Table.css'
 import { Table, TableContainer, TableHead, TableRow, TableCell, TableBody, TablePagination } from '@mui/material';
@@ -13,13 +13,20 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from 'react-router';
 
 
-function TableComponent() {
+function TableComponent({search}) {
 
   const dispatch = useDispatch();
   const { solicitacoes, loading} = useSelector((state) => state.solicitacao);
   const navigate = useNavigate();
 
-  
+  //dynamic search
+  const solicitacoesFiltered = useMemo(() => {
+    const lowerSearch = search.toLowerCase();
+
+    return solicitacoes
+    .filter((solicitacao) => solicitacao.especificacao.toLowerCase().includes(lowerSearch))
+  }, [search])
+
   useEffect(() => {
     dispatch(getAllSolicitacoes());
   }, [dispatch]);
@@ -30,7 +37,7 @@ function TableComponent() {
     handleChangePage,
     handleChangeRowsPerPage,
     paginatedData
-  } = usePagination(solicitacoes );
+  } = usePagination(solicitacoesFiltered);
   //hook for modal delete
   const { openDeleteModal, DeleteModal } = useDeleteModal();
   const {openEditModal, EditModal } = useEditModal()
@@ -64,7 +71,7 @@ function TableComponent() {
             <TableBody>
               {(
                 rowsPerPage > 0 ? 
-                paginatedData :   Array.isArray(solicitacoes) ? solicitacoes : []
+                paginatedData :   Array.isArray(solicitacoes) ? solicitacoesFiltered : []
               ).map((solicitacao, index) => (
               
                 <TableRow key={index} className='bg-white' onClick={()=> navigate(`/solicitacao/${solicitacao.id}`)}>
