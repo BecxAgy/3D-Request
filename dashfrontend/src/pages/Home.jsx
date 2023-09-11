@@ -2,11 +2,12 @@
 import React, { useState } from 'react';
 import HeaderMain from '../components/HeaderMain';
 import TableComponent from '../components/Home/TableComponent';
-import ButtonAdd from '../components/Home/ButtonAdd';
+import { ButtonGroup, Button } from "@material-tailwind/react";
 import SearchInput from '../components/Home/SearchInput';
 import AlertsMessage from '../components/AlertsMessage';
 import { useSelector } from 'react-redux';
 import MenuPopupState from '../components/MenuPopupState';
+import ButtonGroupFilter from '../components/Home/ButtonGroupFilter';
 
 
 const Home = () => {
@@ -23,6 +24,10 @@ const Home = () => {
         <div className='m-2 p-2' >
           <MenuPopupState/>
         </div>
+        <div className='m-2 p-2' >
+          <ButtonGroupFilter/>
+        </div>
+       
         <div className='m-2' >
         <SearchInput search={search} setSearch={setSearch}/>
         </div>
