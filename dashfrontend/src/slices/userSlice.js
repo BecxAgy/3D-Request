@@ -12,7 +12,7 @@ const initialState = {
 export const getUser = createAsyncThunk(
     "user/get",
     async(id, thunkAPI) => {
-        const token = thunkAPI.getState().auth.user.token;
+        const token = JSON.parse(localStorage.getItem("token"));
         //chamar o service get passando o user e o token
         debugger
         const data = await userService.getUser(id, token);

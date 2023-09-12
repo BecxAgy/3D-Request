@@ -1,5 +1,5 @@
 
-import { FiDownloadCloud, FiList, FiUser, FiLogOut, FiHome} from "react-icons/fi";
+import { FiDownloadCloud, FiList, FiUser, FiLogOut, FiHome, FiPlayCircle, FiPlusCircle} from "react-icons/fi";
 
   export const links = [
     {
@@ -16,9 +16,9 @@ import { FiDownloadCloud, FiList, FiUser, FiLogOut, FiHome} from "react-icons/fi
             link:"/historic"
         },
         {
-            name: 'Minhas Solicitações',
-            icon: <FiList/>,
-            link: "/historic/"
+            name: 'Adicionar Solicitação',
+            icon: <FiPlusCircle/>,
+            link: "/form-solicitacao/"
         },
       ],
     },
@@ -27,11 +27,7 @@ import { FiDownloadCloud, FiList, FiUser, FiLogOut, FiHome} from "react-icons/fi
     {
       title: 'Usuário',
       links: [
-        {
-          name: 'Perfil',
-          icon: <FiUser />,
-          link:"/user-profile"
-        },
+       
        
         {
           name: 'Logout',

@@ -4,7 +4,7 @@ import { FaSearch } from 'react-icons/fa'
 
 function SearchInput({search, setSearch}) {
   return (
-  <div class="relative">
+  <div className="relative">
                
     <input value={search} 
     onChange={(e)=> {

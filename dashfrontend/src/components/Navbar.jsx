@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { MdKeyboardArrowDown } from 'react-icons/md';
+import { MdKeyboardArrowDown, MdPerson } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { useStateContext } from '../contexts/ContextProvider';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import { getUser } from '../slices/userSlice';
 
 const NavButton = ({ title, customFunc, icon, color}) => (
   <TooltipComponent content={title} position="BottomCenter">
@@ -24,23 +27,21 @@ const NavButton = ({ title, customFunc, icon, color}) => (
 const Navbar = () => {
   const { currentColor, activeMenu, setActiveMenu} = useStateContext();
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
-  const user = JSON.parse(localStorage.getItem("user"));
+  const userLocal = JSON.parse(localStorage.getItem("user"));
 
-  console.log(user);
-//   const {id} = useParams();
-//   const dispatch = useDispatch();
+  
+   
+   const dispatch = useDispatch();
 
-//   const {user, loading} = useSelector((state) => state.user);
+   const {user, loading} = useSelector((state) => state.user);
 
  
-//  useEffect(() => {
-//   dispatch(getUser(id));
-//   console.log(user.name)
-//  }, [dispatch, id]);
+ useEffect(() => {
+   dispatch(getUser(userLocal['id']));
+   console.log(user)
+  }, [dispatch]);
  
-//  if(loading){
-//   return <h1>Carregando....</h1>
-//  }
+
 
   return (
     <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative ">
@@ -55,13 +56,13 @@ const Navbar = () => {
           >
            
             <p>
-              <span className="text-gray-400 text-14">Olá</span>
-              <span className="text-gray-400 font-bold ml-1 text-14">
-                {user && user.name ? user.name : ""}
+              <span className="text-gray-400 text-12">Olá</span>
+              <span className="text-gray-400 font-bold ml-1 text-12">
+                {userLocal && userLocal.name ? userLocal.name : ""}
                 
               </span>
             </p>
-            <MdKeyboardArrowDown className="text-gray-400 text-14" />
+            <MdPerson className="text-gray-400 text-14" />
           </div>
         </TooltipComponent>
 

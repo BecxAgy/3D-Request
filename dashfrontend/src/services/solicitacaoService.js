@@ -26,6 +26,31 @@ import authService from "./authService";
    }
  }
 
+ //get all method
+ const getAllSolicitacoes = async(token) =>{
+    
+   const config = requestConfig("GET", null, token);
+
+  try{
+     debugger;
+     const res = await fetch(api + "/solicitacao/historic", config)
+     .then((res) => res.json())
+     .catch(err => err);
+
+
+     if(res.message === 'Token não encontrado' || res.message === 'Token inválido'){
+        authService.logout();
+        window.location.href = '/login';
+     }
+     return res;
+
+
+
+  }catch(error){
+     console.log(error);
+  }
+}
+
  //GET BY ID
  const getSolicitacaoById = async (id, token) => {
    const config = requestConfig("GET", null, token);
@@ -113,7 +138,8 @@ const updateSolictacao = async (id, data, token) => {
     createSolicitacao, 
     deleteSolicitacao,
     updateSolictacao, 
-    getSolicitacaoById
+    getSolicitacaoById,
+    getAllSolicitacoes
  }
 
 

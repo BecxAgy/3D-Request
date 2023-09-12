@@ -10,6 +10,8 @@ import ButtonGroupFilter from '../components/Home/ButtonGroupFilter';
 function Historic() {
   const {  error} = useSelector((state) => state.solicitacao)
   const [search, setSearch] = useState("");
+  const [option, setOption] = useState("All");
+
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
     
@@ -18,7 +20,7 @@ function Historic() {
      <div className="md:flex grid-cols-2 gap-3 mb-10 justify-between sm:flex grid-rows-2">
        
        <div className='m-2 p-2' >
-         <ButtonGroupFilter historic='true'/>
+         <ButtonGroupFilter historic='true' option={option} setOption={setOption}/>
        </div>
       
        <div className='m-2' >
@@ -26,7 +28,7 @@ function Historic() {
        </div>
         
      </div>   
-     <TableComponent search={search}/>
+     <TableComponent search={search} historic={true} filterOption={option}/>
    </div>
  
   )

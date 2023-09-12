@@ -3,7 +3,7 @@ import { api, requestConfig } from "../utils/config";
 //GET USER DETAILS
 const getUser = async (id, token) => {
 
-    const config = requestConfig("GET", token);
+    const config = requestConfig("GET",null, token);
 
     try{
         debugger;

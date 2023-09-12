@@ -12,13 +12,26 @@ const initialState = {
 };
 
 
-//slice get all
-export const getAllSolicitacoes = createAsyncThunk("solicitacao/getall", async () => {
+//slice get 
+export const getSolicitacoes = createAsyncThunk("solicitacao/get", async () => {
     const token = JSON.parse(localStorage.getItem("token"));
     debugger;
 
     
         const data = await solicitacaoService.getSolicitacoes(token);
+        return data;
+    
+  
+    
+});
+
+//slice get ALL
+export const getAllSolicitacoes = createAsyncThunk("solicitacao/getall", async () => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    debugger;
+
+    
+        const data = await solicitacaoService.getAllSolicitacoes(token);
         return data;
     
   
@@ -85,6 +98,16 @@ export const solicitacaoSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+        .addCase(getSolicitacoes.pending, (state) => {
+            state.loading = true;
+            state.error = false;
+        })
+        .addCase(getSolicitacoes.fulfilled, (state, action) => {
+            state.loading = false;
+            state.success= true;
+            state.error = null;
+            state.solicitacoes = action.payload;
+        })
         .addCase(getAllSolicitacoes.pending, (state) => {
             state.loading = true;
             state.error = false;

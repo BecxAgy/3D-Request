@@ -38,7 +38,7 @@ function FormProjeto() {
                 )}/>
           
         
-          {!loading && <Button className='w-96 mt-6' size='lg' color='orange' type='submit' onClick={()=>handleSubmit(onSubmit)()}> Cadastrar </Button>}
+          {!loading && <Button className='bg-orange-500 w-96 mt-6' size='lg'  type='submit' onClick={()=>handleSubmit(onSubmit)()}> Cadastrar </Button>}
           
           
           {loading && <CircularProgress/> }

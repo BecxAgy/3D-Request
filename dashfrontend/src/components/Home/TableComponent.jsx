@@ -4,7 +4,7 @@ import './Table.css'
 import { Table, TableContainer, TableHead, TableRow, TableCell, TableBody, TablePagination } from '@mui/material';
 import { FiEdit, FiTrash } from 'react-icons/fi';
 import {useDispatch, useSelector} from "react-redux"
-import { getAllSolicitacoes } from '../../slices/solicitacaoSlice';
+import { getAllSolicitacoes, getSolicitacoes } from '../../slices/solicitacaoSlice';
 import { useEffect } from 'react';
 import usePagination from '../../hooks/usePagination'
 import useDeleteModal from '../../hooks/useDeleteModal';
@@ -13,7 +13,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from 'react-router';
 
 
-function TableComponent({search}) {
+function TableComponent({search, historic, filterOption}) {
 
   const dispatch = useDispatch();
   const { solicitacoes, loading} = useSelector((state) => state.solicitacao);
@@ -22,13 +22,23 @@ function TableComponent({search}) {
   //dynamic search
   const solicitacoesFiltered = useMemo(() => {
     const lowerSearch = search.toLowerCase();
-
+  
     return solicitacoes
-    .filter((solicitacao) => solicitacao.especificacao.toLowerCase().includes(lowerSearch))
-  }, [search])
+      .filter((solicitacao) =>
+        solicitacao.especificacao.toLowerCase().includes(lowerSearch) &&
+        (filterOption === 'All' || solicitacao.Status === filterOption)
+      );
+  }, [search, solicitacoes, filterOption]);
+  
+
+
 
   useEffect(() => {
-    dispatch(getAllSolicitacoes());
+    dispatch(getSolicitacoes());
+
+    if(historic){
+      dispatch(getAllSolicitacoes());
+    }
   }, [dispatch]);
   //hook for pagination
   const {
@@ -70,8 +80,8 @@ function TableComponent({search}) {
             </TableHead>
             <TableBody>
               {(
-                rowsPerPage > 0 ? 
-                paginatedData :   Array.isArray(solicitacoes) ? solicitacoesFiltered : []
+                rowsPerPage > 0 & Array.isArray(solicitacoes) ? 
+                paginatedData :  solicitacoesFiltered 
               ).map((solicitacao, index) => (
               
                 <TableRow key={index} className='bg-white' onClick={()=> navigate(`/solicitacao/${solicitacao.id}`)}>

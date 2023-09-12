@@ -13,6 +13,8 @@ import ButtonGroupFilter from '../components/Home/ButtonGroupFilter';
 const Home = () => {
   const {  error} = useSelector((state) => state.solicitacao)
   const [search, setSearch] = useState("");
+  const [option, setOption] = useState("All");
+
 
   return (
     
@@ -25,7 +27,7 @@ const Home = () => {
           <MenuPopupState/>
         </div>
         <div className='m-2 p-2' >
-          <ButtonGroupFilter/>
+          <ButtonGroupFilter option={option} setOption={setOption}/>
         </div>
        
         <div className='m-2' >
@@ -33,7 +35,7 @@ const Home = () => {
         </div>
          
       </div>   
-      <TableComponent search={search}/>
+      <TableComponent search={search} filterOption={option}/>
     </div>
   
   );
