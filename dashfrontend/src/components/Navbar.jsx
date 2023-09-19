@@ -29,21 +29,7 @@ const Navbar = () => {
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
   const userLocal = JSON.parse(localStorage.getItem("user"));
 
-  
-   
-   const dispatch = useDispatch();
-
-   const {user, loading} = useSelector((state) => state.user);
-
- 
- useEffect(() => {
-   dispatch(getUser(userLocal['id']));
-   console.log(user)
-  }, [dispatch]);
- 
-
-
-  return (
+    return (
     <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative ">
 
       <NavButton title="Menu" customFunc={handleActiveMenu} color={currentColor} icon={<AiOutlineMenu />} />

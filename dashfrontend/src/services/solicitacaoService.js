@@ -13,9 +13,9 @@ import authService from "./authService";
       .catch(err => err);
 
 
-      if(res.message === 'Token não encontrado' || res.message === 'Token inválido'){
+      if(res.message === 'Token não encontrado' || res === 'Token Inválido'){
          authService.logout();
-         window.location.href = '/login';
+         //window.location.href = '/login';
       }
       return res;
 
@@ -38,7 +38,7 @@ import authService from "./authService";
      .catch(err => err);
 
 
-     if(res.message === 'Token não encontrado' || res.message === 'Token inválido'){
+     if(res.message === 'Token não encontrado' || res === 'Token Inválido'){
         authService.logout();
         window.location.href = '/login';
      }
